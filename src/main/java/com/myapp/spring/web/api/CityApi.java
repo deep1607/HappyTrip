@@ -27,6 +27,7 @@ public class CityApi {
 	public ResponseEntity<City> saveNewCity(@RequestBody City city){
 
 	return new ResponseEntity<City>(repository.save(city),HttpStatus.CREATED);
+	
 	}
 	
 	//Admin can add multiple new city

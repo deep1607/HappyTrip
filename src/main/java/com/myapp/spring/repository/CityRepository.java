@@ -17,5 +17,6 @@ public interface CityRepository extends JpaRepository<City, Integer>{
 	//select * from product where price>
 	
 	
+	
     
 }

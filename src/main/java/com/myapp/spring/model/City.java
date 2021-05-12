@@ -26,6 +26,7 @@ public class City {
 	public City(String cityId, String cityName) {
 		this.cityId = cityId;
 		this.cityName = cityName;
+		
 	}
 	
 	public String getCityId() {
