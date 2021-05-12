@@ -18,6 +18,30 @@ import com.myapp.spring.repository.CityRepository;
 @RestController
 @RequestMapping("/admin/cities")
 public class CityApi {
+	@Autowired
+	private CityRepository repository;
+	
+	//Admin can add 1 new city
+	//http://localhost:8888/admin/cities
+	@PostMapping
+	public ResponseEntity<City> saveNewCity(@RequestBody City city){
 
+	return new ResponseEntity<City>(repository.save(city),HttpStatus.CREATED);
+	}
+	
+	
+	//Admin can add multiple new city
+	//http://localhost:8888/admin/cities/bulk
+	@PostMapping("/bulk")
+	public ResponseEntity<List<City>> bulkProuctsInsert(@RequestBody List<City> city){
+	
+	return new ResponseEntity<List<City>>(repository.saveAll(city),HttpStatus.CREATED);
+	}
+	
+	
+
+	
+
+	
 	
 }
