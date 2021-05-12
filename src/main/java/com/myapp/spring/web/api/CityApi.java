@@ -29,7 +29,6 @@ public class CityApi {
 	return new ResponseEntity<City>(repository.save(city),HttpStatus.CREATED);
 	}
 	
-	
 	//Admin can add multiple new city
 	//http://localhost:8888/admin/cities/bulk
 	@PostMapping("/bulk")
