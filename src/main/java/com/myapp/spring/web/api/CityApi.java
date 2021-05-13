@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.myapp.spring.model.City;
 import com.myapp.spring.repository.CityRepository;
+import com.myapp.spring.service.CityService;
 
 @RestController
 @RequestMapping("/admin/cities")
@@ -23,6 +24,8 @@ public class CityApi {
 	@Autowired
 	private CityRepository repository;
 	
+	@Autowired
+	private CityService service;
 	//Admin can add 1 new city
 	//http://localhost:8888/admin/cities
 	@PostMapping
@@ -39,7 +42,7 @@ public class CityApi {
 	
 		
 	
-	return new ResponseEntity<List<City>>(repository.saveAll(city),HttpStatus.CREATED);
+	return new ResponseEntity<List<City>>(service.saveall(city),HttpStatus.CREATED);
 	}
 	
 	
@@ -66,6 +69,14 @@ public class CityApi {
 		return new ResponseEntity<City>(repository.findBycityName(name).get(),HttpStatus.OK);
 	}
 	
-	
+	//Admin can Update City Name
+		//http://localhost:8888/admin/cities/Update/city:{city}
+		@PutMapping("update/")
+		public ResponseEntity<City> updatecitybyid(
+				@RequestBody City city){
+		
+		return new ResponseEntity<City>(service.updateCity(city),HttpStatus.CREATED);
+		}
+		
 		
 }
