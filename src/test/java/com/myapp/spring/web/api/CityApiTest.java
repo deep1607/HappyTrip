@@ -30,6 +30,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.myapp.spring.model.City;
 import com.myapp.spring.repository.CityRepository;
+import com.myapp.spring.service.CityService;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -38,6 +39,9 @@ public class CityApiTest {
 
 	@MockBean
 	private CityRepository repository;
+	
+	@MockBean
+	private CityService service;
 	
 	@Autowired
 	private MockMvc mockMvc;
@@ -64,6 +68,118 @@ public class CityApiTest {
 				.andExpect(jsonPath("$.cityId",is("MUM")))
 				.andExpect(jsonPath("$.cityName",is("Mumbai")));
 	}
+	
+	@Test
+	@DisplayName("Test view all city information")
+	public void testGetAllProductsById() throws Exception {
 		
+		//Prepare Mock Product
+		City city1=new City("MUM","Mumbai");
+		City city2=new City("PUN","Pune");
+	
+		List<City> cities = new ArrayList<>();
+		cities.add(city1);
+		cities.add(city2);
+		
+		doReturn(cities).when(repository).viewcity();
+		
+		mockMvc.perform(MockMvcRequestBuilders.get("/admin/cities"))
+		.andExpect(status().isOk())
+		.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+		
+		.andExpect(jsonPath("$[0].cityId",is("MUM")))
+		.andExpect(jsonPath("$[0].cityName",is("Mumbai")))
+		.andExpect(jsonPath("$[1].cityId",is("PUN")))
+		.andExpect(jsonPath("$[1].cityName",is("Pune")));
+	
+	}
+	
+	
+	
+	@Test
+	@DisplayName("Test Add list of cites")
+	public void testAddAllCity() throws Exception{
+		
+
+		//Prepare Mock Product
+		City city1=new City("MUM","Mumbai");
+		City city2=new City("PUN","Pune");
+	
+		List<City> cities = new ArrayList<>();
+		cities.add(city1);
+		cities.add(city2);
+		
+		
+		doReturn(cities).when(service).saveall(ArgumentMatchers.any());
+		
+		String json = new ObjectMapper().writeValueAsString(cities);
+		
+		mockMvc.perform(post("/admin/cities/bulk")
+				// Validate Status should be 200 ok and json response recived
+				
+				.contentType(MediaType.APPLICATION_JSON_VALUE)
+				.content(new ObjectMapper().writeValueAsString(cities)))
+				
+				//Validate Response body
+				
+				.andExpect(status().isCreated())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+				.andExpect(content().json(json));
+
+	}
+	
+	@Test
+	@DisplayName("Test Find by city id")
+	
+	public void testGetCityById() throws Exception {
+		
+		//Prepare Mock Product
+		City city=new City("MUM","Mumbai");
+
+		
+		doReturn(Optional.of(city)).when(repository).findBycityId(city.getCityId());
+		
+		mockMvc.perform(MockMvcRequestBuilders.get("/admin/cities/findCity/id:{id}",city.getCityId()))
+		.andExpect(status().isOk())
+		.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+		
+		.andExpect(jsonPath("$.cityId",is("MUM")))
+		.andExpect(jsonPath("$.cityName",is("Mumbai")));
+	
+	}
+	
+	@Test
+	@DisplayName("Test Find by city Name")
+	
+	public void testGetCityByName() throws Exception {
+		
+		//Prepare Mock Product
+		City city=new City("MUM","Mumbai");
+
+		
+		doReturn(Optional.of(city)).when(repository).findBycityName(city.getCityName());
+		
+		mockMvc.perform(MockMvcRequestBuilders.get("/admin/cities/findCity/city:{name}",city.getCityName()))
+		.andExpect(status().isOk())
+		.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+		
+		.andExpect(jsonPath("$.cityId",is("MUM")))
+		.andExpect(jsonPath("$.cityName",is("Mumbai")));
+	
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }
