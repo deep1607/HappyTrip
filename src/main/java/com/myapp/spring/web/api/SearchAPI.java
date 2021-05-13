@@ -16,10 +16,6 @@ import com.myapp.spring.repository.SearchRepository;
 public class SearchAPI {
 	@Autowired
 	private SearchRepository repository;
-	@GetMapping
-	public ResponseEntity<List<Search>> findAll(){
-	return new ResponseEntity<List<Search>>(repository.findAll(),HttpStatus.OK);
-	}
 		 @GetMapping("/flight/{fromCity}/{toCity}/{date}")
 		    public ResponseEntity<List<Search>> findFlightByCitiesAndDate
 		    (@PathVariable String fromCity,

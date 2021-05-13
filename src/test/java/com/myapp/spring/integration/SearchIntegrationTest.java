@@ -41,9 +41,9 @@ import com.myapp.spring.repository.SearchRepository;
 	@BeforeEach
 	public void setup() throws JsonParseException, JsonMappingException, IOException {
 	
-	Search products []=new ObjectMapper().readValue(DATA_JSON,Search[].class);
+	Search flights[]=new ObjectMapper().readValue(DATA_JSON,Search[].class);
 	
-	Arrays.stream(products).forEach(repository::save);
+	Arrays.stream(flights).forEach(repository::save);
 	}
 
 	@AfterEach
@@ -60,7 +60,7 @@ import com.myapp.spring.repository.SearchRepository;
 	String toCity ="Mumbai";
 	Date date=Date.valueOf("2021-01-02");
 
-	mockMvc.perform(MockMvcRequestBuilders.get("/user/search/findFlightByCitiesAndDate/{fromCity}/{toCity}/{date}",fromCity ,toCity,date))
+	mockMvc.perform(MockMvcRequestBuilders.get("/user/search/flight/{fromCity}/{toCity}/{date}",fromCity ,toCity,date))
 	
 	.andExpect(status().isOk())
 	.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
