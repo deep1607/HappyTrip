@@ -2,22 +2,16 @@ package com.myapp.spring.model;
 
 import java.sql.Date;
 import java.sql.Time;
-import java.util.Objects;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
 @Entity
-@Table(name="Airlines")
+@Table(name="flight_search")
 public class Search {
 	
 	@Id
-	//@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "FLIGHT_NO")
 	private Integer flightNo;
 	
@@ -41,9 +35,6 @@ public class Search {
 	
 	@Column(name = "COST")
 	private Double cost;
-	
-	@Column(name = "TOTAL_SEATS")
-	private Integer totalSeats;
 	
 	@Column(name = "AVL_SEATS")
 	private Integer avlSeats;
@@ -112,13 +103,6 @@ public class Search {
 		this.cost = cost;
 	}
 
-	public Integer getTotalSeats() {
-		return totalSeats;
-	}
-
-	public void setTotalSeats(Integer totalSeats) {
-		this.totalSeats = totalSeats;
-	}
 
 	public Integer getAvlSeats() {
 		return avlSeats;
@@ -129,7 +113,7 @@ public class Search {
 	}
 
 	public Search(Integer flightNo, String airlineName, String fromCity, String toCity, Date date, Time depTime,
-			Time arrTime, Double cost, Integer totalSeats, Integer avlSeats) {
+			Time arrTime, Double cost, Integer avlSeats) {
 		this.flightNo = flightNo;
 		this.airlineName = airlineName;
 		this.fromCity = fromCity;
@@ -138,35 +122,10 @@ public class Search {
 		this.depTime = depTime;
 		this.arrTime = arrTime;
 		this.cost = cost;
-		this.totalSeats = totalSeats;
 		this.avlSeats = avlSeats;
 	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(airlineName, arrTime, avlSeats, cost, date, depTime, flightNo, fromCity, toCity,
-				totalSeats);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!(obj instanceof Search))
-			return false;
-		Search other = (Search) obj;
-		return Objects.equals(airlineName, other.airlineName) && Objects.equals(arrTime, other.arrTime)
-				&& Objects.equals(avlSeats, other.avlSeats) && Objects.equals(cost, other.cost)
-				&& Objects.equals(date, other.date) && Objects.equals(depTime, other.depTime)
-				&& Objects.equals(flightNo, other.flightNo) && Objects.equals(fromCity, other.fromCity)
-				&& Objects.equals(toCity, other.toCity) && Objects.equals(totalSeats, other.totalSeats);
-	}
 	
-	
-	
-	
-	
-
-	
-	
+   public Search() {
+	   
+   }
 }
