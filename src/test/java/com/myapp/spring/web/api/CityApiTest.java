@@ -94,7 +94,28 @@ public class CityApiTest {
 	
 	}
 	
-	
+	@Test
+	@DisplayName("Test Update City")
+	public void testUpdateCity() throws Exception{
+		
+		City newcity=new City("MUM","Mumbai");
+		
+		doReturn(newcity).when(service).updateCity(ArgumentMatchers.any());
+		
+	    
+		 String json = new ObjectMapper().writeValueAsString(newcity);
+		
+		mockMvc.perform(put("/admin/cities/update/")
+				// Validate Status should be 200 ok and json response recived
+				.contentType(MediaType.APPLICATION_JSON_VALUE)
+				.content(json).accept(MediaType.APPLICATION_JSON))
+				
+				//Validate Response body
+				
+				.andExpect(status().isCreated())
+				.andExpect(jsonPath("$.cityId",is("MUM")))
+				.andExpect(jsonPath("$.cityName",is("Mumbai")));
+	}
 	
 	@Test
 	@DisplayName("Test Add list of cites")
