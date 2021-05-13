@@ -12,8 +12,11 @@ import javax.persistence.Table;
 public class User {
      
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+   // @GeneratedValue(strategy = GenerationType.IDENTITY)
+    
+    
+    @Column(nullable = false)
+    private int id;
      
     @Column(nullable = false, unique = true, length = 45)
     private String email;
@@ -27,11 +30,23 @@ public class User {
     @Column(name = "last_name", nullable = false, length = 20)
     private String lastName;
 
-	public Long getId() {
+	public User(int id,String email, String password, String firstName, String lastName) {
+		this.id = id;
+		this.email = email;
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
+	public User() {
+		
+
+	}
+
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
