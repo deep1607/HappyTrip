@@ -45,7 +45,23 @@ public class RouteApi {
 	return new ResponseEntity<List<RouteModel>>(service.saveall(route),HttpStatus.CREATED);
 	}
 	
+
+	//Admin Search all route displayed 
+	//http://localhost:8888/admin/route
+		@GetMapping
+		public ResponseEntity<List<RouteModel>> viewall(){
+			return new ResponseEntity<List<RouteModel>>(repository.viewAllRoute(),HttpStatus.OK);	
+		}
 	
+	
+	//Admin can Update route 
+		//http://localhost:8888/admin/route/update
+		@PutMapping("update/")
+		public ResponseEntity<RouteModel> updatecitybyid(
+				@RequestBody RouteModel city){
+		
+		return new ResponseEntity<RouteModel>(service.updateCity(city),HttpStatus.CREATED);
+		}
 		
 		
 }
