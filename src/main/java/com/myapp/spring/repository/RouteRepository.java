@@ -8,22 +8,21 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.myapp.spring.model.City;
+import com.myapp.spring.model.RouteModel;
 
 // Annotation is to identify that this is spring managed bean
 // This is a data repository class
 // 
 
 @Repository
-public interface CityRepository extends JpaRepository<City, Integer>{
+public interface RouteRepository extends JpaRepository<RouteModel, Integer>{
 	//select * from product where price>
 	
-	@Query(value="SELECT * FROM Cities ORDER BY city_id ASC",nativeQuery=true)
-	public List<City> viewcity();
+	@Query(value="SELECT * FROM Route ORDER BY Route_id ASC",nativeQuery=true)
+	public List<RouteModel> viewAllRoute();
 	
-	Optional <City> findBycityName(String cityName);
+	Optional <RouteModel> findByFromCityAndToCity(String fromCity,String toCity);
 	
-	Optional <City> findBycityId(String cityId);
 
     
 }
