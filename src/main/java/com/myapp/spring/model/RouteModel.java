@@ -14,7 +14,7 @@ import javax.persistence.Table;
 public class RouteModel {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	//@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="Route_id",nullable = false,unique = true)
 	private int routeId;
 	
