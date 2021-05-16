@@ -27,8 +27,8 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.myapp.spring.model.Login;
-import com.myapp.spring.model.User;
-import com.myapp.spring.repository.UserRepository;
+import com.myapp.spring.model.Admin;
+import com.myapp.spring.repository.AdminRepository;
 import com.myapp.spring.service.LoginService;
 
 @SpringBootTest
@@ -36,7 +36,7 @@ import com.myapp.spring.service.LoginService;
 public class LoginIntegrationTest {
 
 	@Autowired
-    private UserRepository repository;
+    private AdminRepository repository;
 	
 	@Autowired
     private LoginService services;
@@ -44,15 +44,15 @@ public class LoginIntegrationTest {
     @Autowired
     private MockMvc mockMvc;
     
-    private static File DATA_JSON= Paths.get("src","test","resources","Users.json").toFile();
+    private static File DATA_JSON= Paths.get("src","test","resources","Admins.json").toFile();
     
     @BeforeEach
     public void setup() throws JsonParseException, JsonMappingException, IOException {
     
-    User users[] = new ObjectMapper().readValue(DATA_JSON,User[].class);
+    Admin admins[] = new ObjectMapper().readValue(DATA_JSON,Admin[].class);
     
     //save each product to database
-    Arrays.stream(users).forEach(repository::save);
+    Arrays.stream(admins).forEach(repository::save);
     }
     @AfterEach
     public void cleanUp() {
@@ -65,7 +65,7 @@ public class LoginIntegrationTest {
 	public void testLoginValidation() throws Exception {
 		
 		//Prepare Mock Product
-				Login newUser =new Login("abc@email.com","12345");
+				Login newAdmin =new Login("abc@email.com","12345");
 				
 				//Login mockUser =new Login("abc","12345");
 				
@@ -77,10 +77,10 @@ public class LoginIntegrationTest {
 				
 				// Perform GET Request
 				
-				mockMvc.perform(MockMvcRequestBuilders.post("/login")
+				mockMvc.perform(MockMvcRequestBuilders.post("/admin/login")
 				// Validate Status should be 200 ok and json response recived
 				.contentType(MediaType.APPLICATION_JSON_VALUE)
-				.content(new ObjectMapper().writeValueAsString(newUser)))
+				.content(new ObjectMapper().writeValueAsString(newAdmin)))
 				
 				//Validate Response body
 				.andExpect(status().isOk())

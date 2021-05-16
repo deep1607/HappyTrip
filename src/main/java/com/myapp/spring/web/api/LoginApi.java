@@ -13,18 +13,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.myapp.spring.model.Login;
 
-import com.myapp.spring.model.User;
-import com.myapp.spring.repository.UserRepository;
+import com.myapp.spring.model.Admin;
+import com.myapp.spring.repository.AdminRepository;
 import com.myapp.spring.service.LoginService;
 
 	//This is a class which exposes rest api's
 	@RestController
-	@RequestMapping("/login")
+	@RequestMapping("/admin/login")
 	public class LoginApi {
 		
 		//Dependency Injection
 		@Autowired
-		private UserRepository repository;
+		private AdminRepository repository;
 		
 		@Autowired
 		private LoginService service;
@@ -41,9 +41,9 @@ import com.myapp.spring.service.LoginService;
 		}
 		
 		@GetMapping
-		public ResponseEntity<List<User>> findAll(){
+		public ResponseEntity<List<Admin>> findAll(){
 			
-			return new ResponseEntity<List<User>>(repository.findAll(),HttpStatus.OK);
+			return new ResponseEntity<List<Admin>>(repository.findAll(),HttpStatus.OK);
 			}
 		
 	     

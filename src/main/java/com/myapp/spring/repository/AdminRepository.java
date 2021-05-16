@@ -5,13 +5,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 
-import com.myapp.spring.model.User;
+import com.myapp.spring.model.Admin;
 
 
 @Repository
-public interface UserRepository extends JpaRepository < User, Integer > {
+public interface AdminRepository extends JpaRepository < Admin, String > {
 	
-	Optional<User> findByemailAndPassword(String email,String password);
+	Optional<Admin> findByemailAndPassword(String email,String password);
 	
    
 }

@@ -18,8 +18,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.myapp.spring.model.Login;
-import com.myapp.spring.model.User;
-import com.myapp.spring.repository.UserRepository;
+import com.myapp.spring.model.Admin;
+import com.myapp.spring.repository.AdminRepository;
 import com.myapp.spring.service.LoginService;
 
 @SpringBootTest
@@ -28,7 +28,7 @@ import com.myapp.spring.service.LoginService;
 public class LoginApiTest {
 
 	@MockBean
-	private UserRepository repository;
+	private AdminRepository repository;
 	
 	@MockBean
 	private LoginService services;
@@ -79,7 +79,7 @@ public class LoginApiTest {
 				Login mockUser =new Login("abc@email.com","12345");
 				
 				
-				User user1 = new User( 1, "abc@email.com"," abc12", "abc" ,"12345");
+				Admin admin = new Admin( 1, "abc@email.com","12345");
 				
 				//mockUser.setLogin();
 				
@@ -90,7 +90,7 @@ public class LoginApiTest {
 				
 				// Perform GET Request
 				
-				mockMvc.perform(post("/login")
+				mockMvc.perform(post("/admin/login")
 				// Validate Status should be 200 ok and json response recived
 				.contentType(MediaType.APPLICATION_JSON_VALUE)
 				.content(new ObjectMapper().writeValueAsString(newUser)))
