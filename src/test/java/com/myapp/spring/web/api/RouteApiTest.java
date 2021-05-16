@@ -70,6 +70,28 @@ public class RouteApiTest {
 				.andExpect(content().json(json));
 	}
 	
+	@Test
+	@DisplayName("Test view all route information")
+	public void testGetAllRoute() throws Exception {
+		
+		//Prepare Mock Product
+		RouteModel route1=new RouteModel(4, "Mumbai", "Bangalore", 836);
+		RouteModel route2=new RouteModel(5, "Delhi", "Bangalore", 1737);
+	
+		List<RouteModel> routes = new ArrayList<>();
+		routes.add(route1);
+		routes.add(route2);
+		
+		String json = new ObjectMapper().writeValueAsString(routes);
+		
+		doReturn(routes).when(repository).viewAllRoute();
+		
+		mockMvc.perform(MockMvcRequestBuilders.get("/admin/route"))
+		.andExpect(status().isOk())
+		.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+		.andExpect(content().json(json));
+	}
+	
 	
 	
 	
