@@ -1,13 +1,13 @@
 [
 	{   
 		"id":"1",
-		"Name":"vibhor",
-		"DateOfBirth":"1998-01-01",
+		"name":"vibhor",
+		"dateOfBirth":"1998-01-01",
 		"fromcity":"Delhi",
 		"tocity":"Mumbai",
 		"seats":"2",
-		"Date":"2021-01-01",
-		"FlightNo":"1"
+		"date":"2021-01-01",
+		"flightNo":"1"
 	}
 	
 	
