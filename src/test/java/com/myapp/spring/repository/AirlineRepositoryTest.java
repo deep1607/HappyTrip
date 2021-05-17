@@ -60,6 +60,7 @@ public class AirlineRepositoryTest {
 	
 		Airlines airlines = new Airlines("QA12","QattarAirways");
 		airlines.setAirline_code("QA12");
+		airlines.setAirline_name("QattarAirways");
 
 		Airlines savedAirlines = repository.save(airlines);
 
@@ -77,6 +78,7 @@ public class AirlineRepositoryTest {
 	
 		Airlines airlines = new Airlines("QA12","QattarAirways");
 		airlines.setAirline_code("QA12");
+		airlines.setAirline_name("QattarAirways");
 		
 		Airlines updatedAirlines = repository.save(airlines);
 		

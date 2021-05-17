@@ -66,8 +66,8 @@ public class AirlineApi {
 	}
 	
 	//Admin should be able to update an airline
-	//http://localhost:8888/api/v1/products
-	@PutMapping("/{airline_code}")
+	//http://localhost:8888/admin/airlines/update/{airline_code}
+	@PutMapping("/update/{airline_code}")
 	public ResponseEntity<Airlines> updateAirlinesByCode(@PathVariable("airline_code") String airline_code,
 			@RequestBody Airlines airline){
 			
@@ -81,8 +81,8 @@ public class AirlineApi {
 	}
 	
 	//Admin should be able to update an airline
-	//http://localhost:8888/api/v1/products
-	@PutMapping("/{airline_name}")
+	//http://localhost:8888/admin/airlines/update/{airline_name}
+	@PutMapping("/update/{airline_name}")
 	public ResponseEntity<Airlines> updateAirlinesByName(@PathVariable("airline_name") String airline_name,
 			@RequestBody Airlines airline){
 			

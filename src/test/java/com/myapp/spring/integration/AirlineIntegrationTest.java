@@ -185,6 +185,7 @@ public class AirlineIntegrationTest {
 	}
 
 	//Admin should be able to update an airline
-	//http://localhost:8888/api/v1/products	
+	//http://localhost:8888/admin/airlines/update/{airline_code}
+	
 
 }

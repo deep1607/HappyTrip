@@ -184,5 +184,8 @@ public class AirlineAPITest {
 		.andExpect(jsonPath("$[1].Airline_name", is("QattarAirways")));
 	}
 	
+	//Admin should be able to update an airline
+	//http://localhost:8888/admin/airlines/update/{airline_code}
+	
 
 }
