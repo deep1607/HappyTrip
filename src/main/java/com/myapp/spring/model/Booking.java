@@ -37,7 +37,6 @@ import javax.persistence.Table;
 		private int FlightNo;
 		
 		public Booking() {
-			// TODO Auto-generated constructor stub
 		}
 
 		public Booking(int id, String name, String dateOfBirth, String fromcity, String tocity, java.sql.Date date,

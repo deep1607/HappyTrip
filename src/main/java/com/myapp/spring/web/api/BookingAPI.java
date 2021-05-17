@@ -19,7 +19,6 @@ import com.myapp.spring.repository.SearchRepository;
 import com.myapp.spring.service.BookingService;
 
 
-	//This is a class which exposes rest api's
 	@RestController
 	@RequestMapping("/booking")
 	public class BookingAPI {
