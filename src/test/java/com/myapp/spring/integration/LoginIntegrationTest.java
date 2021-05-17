@@ -76,7 +76,7 @@ public class LoginIntegrationTest {
 				// Perform GET Request
 				
 				mockMvc.perform(MockMvcRequestBuilders.post("/admin/login")
-				// Validate Status should be 200 ok and json response recived
+				// Validate Status should be 200 ok and json response received
 				.contentType(MediaType.APPLICATION_JSON_VALUE)
 				.content(new ObjectMapper().writeValueAsString(newAdmin)))
 				

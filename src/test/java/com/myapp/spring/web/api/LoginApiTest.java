@@ -47,11 +47,7 @@ public class LoginApiTest {
 		
 		//mockUser.setLogin();
 		
-		// Prepare Mock Service Method
-		
 		//doReturn(mockUser).when(repository).save(ArgumentMatchers.any());
-		
-		// Perform GET Request
 		
 		//mockMvc.perform(post("/check/login/login")
 		// Validate Status should be 200 ok and json response recived
