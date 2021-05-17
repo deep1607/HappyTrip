@@ -1,4 +1,4 @@
-package com.myapp.spring.integartion;
+package com.myapp.spring.integration;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.Mockito.doReturn;

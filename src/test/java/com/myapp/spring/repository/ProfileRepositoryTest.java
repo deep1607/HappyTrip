@@ -1,4 +1,4 @@
-package com.myapp.spring.repsoitory;
+package com.myapp.spring.repository;
 
 import java.io.File;
 import java.io.IOException;

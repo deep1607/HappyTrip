@@ -1,4 +1,4 @@
-package com.myapp.spring.integartion;
+package com.myapp.spring.integration;
 
 
 

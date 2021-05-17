@@ -1,4 +1,4 @@
-package com.myapp.spring.repsoitory;
+package com.myapp.spring.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
