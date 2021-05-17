@@ -11,6 +11,8 @@ import com.myapp.spring.model.Search;
 public interface SearchRepository extends JpaRepository<Search, Integer> {
 
 	Optional<List<Search>> findByFromCityAndToCityAndDateOrderByCostAsc(String fromCity,String toCity,Date date );
+	
+	
 
 }
 

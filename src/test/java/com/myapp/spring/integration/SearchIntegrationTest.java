@@ -53,14 +53,40 @@ import com.myapp.spring.repository.SearchRepository;
 
 	@Test
 
-	@DisplayName("Test find by FromCity and ToCity and Date")
-	public void testfindByFromCityAndToCityAndDateOrderByCostAsc() throws Exception {
+	@DisplayName("Test find flight by Registered User With FromCity and ToCity and Date")
+	public void testfindByRegisteredUserFromCityAndToCityAndDateOrderByCostAsc() throws Exception {
 
 	String fromCity ="Chennai";
 	String toCity ="Mumbai";
 	Date date=Date.valueOf("2021-01-02");
 
 	mockMvc.perform(MockMvcRequestBuilders.get("/user/search/flight/{fromCity}/{toCity}/{date}",fromCity ,toCity,date))
+	
+	.andExpect(status().isOk())
+	.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+	
+	.andExpect(jsonPath("$[0].flightNo" , is(5)))
+	.andExpect(jsonPath("$[0].airlineName" , is("Deccan-D1")))
+	.andExpect(jsonPath("$[0].fromCity" , is("Chennai")))
+	.andExpect(jsonPath("$[0].toCity" , is("Mumbai")))
+	.andExpect(jsonPath("$[0].date" , is("2021-01-02")))
+	.andExpect(jsonPath("$[0].depTime" , is("08:00:00")))
+	.andExpect(jsonPath("$[0].arrTime" , is("09:00:00")))
+	.andExpect(jsonPath("$[0].cost" , is(6900.00)))
+	.andExpect(jsonPath("$[0].avlSeats" , is(60)));
+
+	}
+	
+	@Test
+
+	@DisplayName("Test find flight by Un-Registered User With FromCity and ToCity and Date")
+	public void testfindByUnregisteredUserFromCityAndToCityAndDateOrderByCostAsc() throws Exception {
+
+	String fromCity ="Chennai";
+	String toCity ="Mumbai";
+	Date date=Date.valueOf("2021-01-02");
+
+	mockMvc.perform(MockMvcRequestBuilders.get("/search/flight/{fromCity}/{toCity}/{date}",fromCity ,toCity,date))
 	
 	.andExpect(status().isOk())
 	.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
