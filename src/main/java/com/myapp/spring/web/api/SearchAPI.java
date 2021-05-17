@@ -34,6 +34,3 @@ public class SearchAPI {
 			repository.findByFromCityAndToCityAndDateOrderByCostAsc(fromCity,toCity,date).get(),HttpStatus.OK);}   
 }
 
-	
-
-
