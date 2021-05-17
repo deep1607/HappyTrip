@@ -12,6 +12,7 @@ import javax.persistence.Table;
 @Table(name="Cities")
 
 public class City {
+	
 
 	@Id
 	//@GeneratedValue(strategy = GenerationType.AUTO)
