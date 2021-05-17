@@ -75,4 +75,5 @@ public class BookingAPITest {
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$.name",is("vibhor")));
 	}	
+	
 }

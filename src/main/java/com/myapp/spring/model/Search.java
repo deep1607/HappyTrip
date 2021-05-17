@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name="Airlines")
+@Table(name="flight_search")
 public class Search {
 	
 	@Id

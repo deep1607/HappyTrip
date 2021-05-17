@@ -69,22 +69,50 @@ public class IntegrationBookingTest {
 	
 
 	@Test
-	@DisplayName("Booking Validation")
-	public void testBookingValidation() throws Exception {
+	@DisplayName("Booking Done")
+	public void testBookingDone() throws Exception {
 		
 		//Prepare Mock Product
 		java.sql.Date date = java.sql.Date.valueOf("2021-01-01");
-		Booking newuserbooking = new Booking(4,"vibhor", "21st june", "Delhi", "Mumbai", date, 4, 1);
+		Booking newuserbooking = new Booking(4,"vibhor", "21st june","Delhi","Mumbai", date, 4, 4);
+		
+		
+		String json = new ObjectMapper().writeValueAsString(newuserbooking);
+				
+				mockMvc.perform(post("/booking")
+				// Validate Status should be 200 ok and json response recived
+						.contentType(MediaType.APPLICATION_JSON_VALUE)
+						.content(new ObjectMapper().writeValueAsString(newuserbooking)))
+						
+						//Validate Response body
+						
+						.andExpect(status().isOk())
+						.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+						.andExpect(jsonPath("$.name",is("vibhor")))
+						.andExpect(jsonPath("$.dateOfBirth",is("21st june")))
+						.andExpect(jsonPath("$.fromcity",is("Delhi")))
+						.andExpect(jsonPath("$.tocity",is("Mumbai")));
+	}	
+	
+
+	@Test
+	@DisplayName("Booking not done")
+	public void testBookingNotDone() throws Exception {
+		
+		//Prepare Mock Product
+		java.sql.Date date = java.sql.Date.valueOf("2021-01-02");
+		Booking newuserbooking = new Booking(4,"vibhor", "21st june","Mumbai","Delhi", date, 4, 5);
 				
 				
 				mockMvc.perform(post("/booking")
 				// Validate Status should be 200 ok and json response recived
-				.contentType(MediaType.APPLICATION_JSON_VALUE)
-				.content(new ObjectMapper().writeValueAsString(newuserbooking)))
-				
-				//Validate Response body
-				
-				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE));
+						.contentType(MediaType.APPLICATION_JSON_VALUE)
+						.content(new ObjectMapper().writeValueAsString(newuserbooking)))
+						
+						//Validate Response body
+						
+						.andExpect(status().isOk())
+						.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+						.andExpect(jsonPath("$.name",is("")));
 	}	
 }

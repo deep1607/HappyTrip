@@ -44,12 +44,7 @@ import com.myapp.spring.service.BookingService;
 			return new ResponseEntity<Booking>(service.BookingCheck(BookingInfo),HttpStatus.OK);
 		}
 		
-	@GetMapping
-	public ResponseEntity<List<Booking>> findAll(){
-		
-		return new ResponseEntity<List<Booking>>(brepository.findAll(),HttpStatus.OK);
-		}
-		
+	
 	     
 	}
 		

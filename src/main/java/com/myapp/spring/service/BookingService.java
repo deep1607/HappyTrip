@@ -26,10 +26,12 @@ public class BookingService {
 		 String fromcity=bookingInfo.getFromcity();
 		Date date = bookingInfo.getDate();
 		int seats = bookingInfo.getSeats();
+		int flightno =bookingInfo.getFlightNo();
+		
 		try {
-		Search search = srepository.checkingSeatAvail(fromcity, tocity, date, seats).get();
+		Search search = srepository.checkingSeatAvail(fromcity, tocity, date, seats,flightno).get();
 		}catch(Exception e){
-			Booking empty = new Booking(0, null, "", null, null, null,0, 0);
+			Booking empty = new Booking(0, "", "", "", "", null,0, 0);
 			return empty;
 		}
 		
