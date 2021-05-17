@@ -1,4 +1,4 @@
-package com.myapp.spring.web;
+package com.myapp.spring.web.api;
 
 	
 import java.util.List;
