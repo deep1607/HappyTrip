@@ -71,8 +71,6 @@ public class LoginIntegrationTest {
 				
 				//mockUser.setLogin();
 				
-				// Prepare Mock Service Method
-				
 				//doReturn(mockUser).when(repository).save(ArgumentMatchers.any());
 				
 				// Perform GET Request
