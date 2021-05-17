@@ -82,7 +82,7 @@ public class AirlineIntegrationTest {
 	//Admin is able to view all airlines
 	//http://localhost:8888/admin/airlines/find/{Airline_name}
 	@Test
-	@DisplayName("Test Find Product By Airline_name - GET /admin/airlines/find/{Airline_name}")
+	@DisplayName("Test Find Airline By Airline_name - GET /admin/airlines/find/{Airline_name}")
 	public void testfindAirlinesByName() throws Exception{
 		
 		mockMvc.perform(MockMvcRequestBuilders.get("/admin/airlines/find/{Airline_name}","Kingfisher"))
@@ -107,7 +107,7 @@ public class AirlineIntegrationTest {
 	//Admin is able to view all airlines
 	//http://localhost:8888/admin/airlines/find/{Airline_code}
 	@Test
-	@DisplayName("Test Find Product By Airline_code - GET /admin/airlines/find/{Airline_code}")
+	@DisplayName("Test Find Airline By Airline_code - GET /admin/airlines/find/{Airline_code}")
 	public void testfindAirlinesByCode() throws Exception{
 		
 		mockMvc.perform(MockMvcRequestBuilders.get("/admin/airlines/find/{Airline_name}","K12"))
@@ -167,7 +167,7 @@ public class AirlineIntegrationTest {
 		
 		List<Airlines> newAirlines = new ArrayList<>();
 		newAirlines.add(newAirlines1);
-		newAirlines.add(newAirlines1);
+		newAirlines.add(newAirlines2);
 		
 		mockMvc.perform(MockMvcRequestBuilders.post("/admin/airlines/add")
 		.contentType(MediaType.APPLICATION_JSON_VALUE)

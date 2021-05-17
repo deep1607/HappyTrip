@@ -49,7 +49,7 @@ public class AirlineAPITest {
 		
 		List<Airlines> airlines = new ArrayList<>();
 		airlines.add(airlines1);
-		airlines.add(airlines1);
+		airlines.add(airlines2);
 		
 		doReturn(airlines).when(repository).findAll();
 		
@@ -69,7 +69,7 @@ public class AirlineAPITest {
 	//Admin is able to view all airlines
 	//http://localhost:8888/admin/airlines/find/{Airline_name}
 	@Test
-	@DisplayName("Test Find Product By Airline_name - GET /admin/airlines/find/{Airline_name}")
+	@DisplayName("Test Find Airlines By Airline_name - GET /admin/airlines/find/{Airline_name}")
 	public void testfindAirlinesByName() throws Exception{
 
 		Airlines airlines = new Airlines("AA12","AmericanAirlines");
@@ -91,7 +91,7 @@ public class AirlineAPITest {
 	//Admin is able to view all airlines
 	//http://localhost:8888/admin/airlines/find/{Airline_code}
 	@Test
-	@DisplayName("Test Find Product By Airline_code - GET /admin/airlines/find/{Airline_code}")
+	@DisplayName("Test Find Airlines By Airline_code - GET /admin/airlines/find/{Airline_code}")
 	public void testfindAirlinesByCode() throws Exception{
 
 		Airlines airlines = new Airlines("AA12","AmericanAirlines");

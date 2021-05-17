@@ -55,7 +55,7 @@ public class AirlineRepositoryTest {
 	
 
 	@Test
-	@DisplayName("Test product saved successfully")
+	@DisplayName("Test Airline saved successfully")
 	public void testAirlinesSavedSuccessfully() {
 	
 		Airlines airlines = new Airlines("QA12","QattarAirways");
@@ -68,12 +68,13 @@ public class AirlineRepositoryTest {
 	
 		Assertions.assertNotNull(savedAirlines.getAirline_code(),"New Airlines should have Code");
 		
-		Assertions.assertEquals(airlines.getAirline_name(), savedAirlines.getAirline_name());;
+		Assertions.assertEquals(airlines.getAirline_name(), savedAirlines.getAirline_name());
+		Assertions.assertEquals(airlines.getAirline_code(), savedAirlines.getAirline_code());
 	
 	}
 	
 	@Test
-	@DisplayName("Test product updated successfully")
+	@DisplayName("Test Airline updated successfully")
 	public void testAirlinesUpdatedSuccessfully() {
 	
 		Airlines airlines = new Airlines("QA12","QattarAirways");
