@@ -1,10 +1,8 @@
 package com.myapp.spring.model;
 
 import java.sql.Date;
-
 import java.sql.Time;
 import java.util.Objects;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -12,11 +10,10 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name="Airlines")
+@Table(name="flight_search")
 public class Search {
 	
 	@Id
-	//@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "FLIGHT_NO")
 	private Integer flightNo;
 	
@@ -129,7 +126,9 @@ public class Search {
 		this.cost = cost;
 		this.avlSeats = avlSeats;
 	}
-	public Search() {
-	}
-}
+
 	
+   public Search() {
+	   
+   }
+}
