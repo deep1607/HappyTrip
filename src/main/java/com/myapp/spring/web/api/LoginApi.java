@@ -40,11 +40,5 @@ import com.myapp.spring.service.LoginService;
 			return new ResponseEntity<Login>(service.logincheck(loginInfo),HttpStatus.OK);
 		}
 		
-		@GetMapping
-		public ResponseEntity<List<Admin>> findAll(){
-			
-			return new ResponseEntity<List<Admin>>(repository.findAll(),HttpStatus.OK);
-			}
-		
 	     
 	}
