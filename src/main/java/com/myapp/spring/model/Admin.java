@@ -24,18 +24,6 @@ public class Admin {
     @Column(nullable = false, length = 64)
     private String password;
 
-	public Admin(int id,String email, String password) {
-		this.id = id;
-		this.email = email;
-		this.password = password;
-	}
-	
-	
-	public Admin() {
-		
-
-	}
-
 	public int getId() {
 		return id;
 	}
@@ -60,6 +48,17 @@ public class Admin {
 		this.password = password;
 	}
 
+	public Admin(int id,String email, String password) {
+		this.id = id;
+		this.email = email;
+		this.password = password;
+	}
+	
+	
+	public Admin() {
+		
+
+	}
 	
       
 }
