@@ -56,7 +56,7 @@ public class RouteApi {
 	
 	//Admin can Update route 
 		//http://localhost:8888/admin/route/update
-		@PutMapping("update/")
+		@PutMapping("update")
 		public ResponseEntity<RouteModel> updatecitybyid(
 				@RequestBody RouteModel city){
 		

@@ -121,7 +121,7 @@ public class RouteIntegrationTest {
 		
 		 String json = new ObjectMapper().writeValueAsString(newroute);
 		
-		mockMvc.perform(put("/admin/route/update/")
+		mockMvc.perform(put("/admin/route/update")
 				// Validate Status should be 200 ok and json response recived
 				.contentType(MediaType.APPLICATION_JSON_VALUE)
 				.content(json).accept(MediaType.APPLICATION_JSON))

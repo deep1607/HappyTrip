@@ -2,6 +2,7 @@ package com.myapp.spring.web.api;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.Mockito.doReturn;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.myapp.spring.model.Airlines;
 import com.myapp.spring.repository.AirlineRepository;
+import com.myapp.spring.service.AirlineService;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -29,6 +31,11 @@ public class AirlineAPITest {
 	
 	@MockBean
 	private AirlineRepository repository;
+	
+
+	@MockBean
+	private AirlineService service;
+	
 	
 	@Autowired
 	private MockMvc mockMvc;
@@ -40,29 +47,25 @@ public class AirlineAPITest {
 	public void testfindAllAirlines() throws Exception{
 
 		Airlines airlines1 = new Airlines("AA12","AmericanAirlines");
-		airlines1.setAirline_code("AA12");
-		airlines1.setAirline_name("AmericanAirlines");
 		
 		Airlines airlines2 = new Airlines("QA12","QattarAirways");
-		airlines2.setAirline_code("QA12");
-		airlines2.setAirline_name("QattarAirways");
+
 		
 		List<Airlines> airlines = new ArrayList<>();
 		airlines.add(airlines1);
-		airlines.add(airlines1);
+		airlines.add(airlines2);
 		
-		doReturn(airlines).when(repository).findAll();
+		doReturn(airlines).when(repository).viewairline();
 		
-		mockMvc.perform(MockMvcRequestBuilders.get("/admin/airlines/findAll"))
+		mockMvc.perform(MockMvcRequestBuilders.get("/admin/airlines"))
 		//Validate status should be 
 		.andExpect(status().isOk())
 		.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 		//Validate Response Body
-		.andExpect(jsonPath("$[0].Airline_code", is("AA12")))
-		.andExpect(jsonPath("$[0].Airline_name", is("AmericanAirlines")))
-		
-		.andExpect(jsonPath("$[1].Airline_code", is("QA12")))
-		.andExpect(jsonPath("$[1].Airline_name", is("QattarAirways")));
+		.andExpect(jsonPath("$[0].airlineCode", is("AA12")))
+		.andExpect(jsonPath("$[0].airlineName", is("AmericanAirlines")))
+		.andExpect(jsonPath("$[1].airlineCode", is("QA12")))
+		.andExpect(jsonPath("$[1].airlineName", is("QattarAirways")));
 		
 	}	
 
@@ -73,18 +76,16 @@ public class AirlineAPITest {
 	public void testfindAirlinesByName() throws Exception{
 
 		Airlines airlines = new Airlines("AA12","AmericanAirlines");
-		airlines.setAirline_code("AA12");
-		airlines.setAirline_name("AmericanAirlines");
 		
-		doReturn(Optional.of(airlines)).when(repository).findByAirline_name(airlines.getAirline_name());
+		doReturn(Optional.of(airlines)).when(repository).findByAirlineName(airlines.getAirlineName());
 		
-		mockMvc.perform(MockMvcRequestBuilders.get("/admin/airlines/find/{Airline_name}",1))
+		mockMvc.perform(MockMvcRequestBuilders.get("/admin/airlines/findAirline/airline:{name}","AmericanAirlines"))
 		
 		.andExpect(status().isOk())
 		.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 		
-		.andExpect(jsonPath("$.Airline_code", is("AA12")))
-		.andExpect(jsonPath("$.Airline_name", is("AmericanAirlines")));
+		.andExpect(jsonPath("$.airlineCode", is("AA12")))
+		.andExpect(jsonPath("$.airlineName", is("AmericanAirlines")));
 		
 	}
 	
@@ -95,18 +96,16 @@ public class AirlineAPITest {
 	public void testfindAirlinesByCode() throws Exception{
 
 		Airlines airlines = new Airlines("AA12","AmericanAirlines");
-		airlines.setAirline_code("AA12");
-		airlines.setAirline_name("AmericanAirlines");
 		
-		doReturn(Optional.of(airlines)).when(repository).findByAirline_code(airlines.getAirline_code());
+		doReturn(Optional.of(airlines)).when(repository).findByAirlineCode(airlines.getAirlineCode());
 		
-		mockMvc.perform(MockMvcRequestBuilders.get("/admin/airlines/find/{Airline_code}",1))
+		mockMvc.perform(MockMvcRequestBuilders.get("/admin/airlines/findAirline/code:{code}","AA12"))
 		
 		.andExpect(status().isOk())
 		.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 		
-		.andExpect(jsonPath("$.Airline_code", is("AA12")))
-		.andExpect(jsonPath("$.Airline_name", is("AmericanAirlines")));
+		.andExpect(jsonPath("$.airlineCode", is("AA12")))
+		.andExpect(jsonPath("$.airlineName", is("AmericanAirlines")));
 		
 	}
 		
@@ -117,75 +116,72 @@ public class AirlineAPITest {
 	public void testaddNewAirline() throws Exception{
 
 		Airlines newAirlines = new Airlines("AA12","AmericanAirlines");
-		newAirlines.setAirline_code("AA12");
-		newAirlines.setAirline_name("AmericanAirlines");
-		
 		Airlines mockAirlines = new Airlines("AA12","AmericanAirlines");
-		mockAirlines.setAirline_code("AA12");
-		mockAirlines.setAirline_name("AmericanAirlines");
+
 		
 		doReturn(mockAirlines).when(repository).save(ArgumentMatchers.any());
 		
-		mockMvc.perform(MockMvcRequestBuilders.post("/admin/airlines/add")
+		mockMvc.perform(MockMvcRequestBuilders.post("/admin/airlines")
 		.contentType(MediaType.APPLICATION_JSON_VALUE)
 		.content(new ObjectMapper().writeValueAsString(newAirlines)))
 		
 		.andExpect(status().isCreated())
 		.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 		
-		.andExpect(jsonPath("$.Airline_code", is("AA12")))
-		.andExpect(jsonPath("$.Airline_name", is("AmericanAirlines")));
+		.andExpect(jsonPath("$.airlineCode", is("AA12")))
+		.andExpect(jsonPath("$.airlineName", is("AmericanAirlines")));
 		
 	}
 
 	//Admin should be able to add an airline
 	//http://localhost:8888/admin/airlines/add/bulk
 	@Test
-	@DisplayName("Test Bulk Insert New Airline - POST /admin/airlines/add/bulk")
+	@DisplayName("Test Bulk Insert New Airline - POST /admin/airlines/bulk")
 	public void testbulkAirlineInsert() throws Exception{
 
 		Airlines newAirlines1 = new Airlines("AA12","AmericanAirlines");
-		newAirlines1.setAirline_code("AA12");
-		newAirlines1.setAirline_name("AmericanAirlines");
 		
 		Airlines newAirlines2 = new Airlines("QA12","QattarAirways");
-		newAirlines2.setAirline_code("QA12");
-		newAirlines2.setAirline_name("QattarAirways");
-		
+
 		List<Airlines> newAirlines = new ArrayList<>();
 		newAirlines.add(newAirlines1);
 		newAirlines.add(newAirlines2);
 		
-		Airlines mockAirlines1 = new Airlines("AA12","AmericanAirlines");
-		mockAirlines1.setAirline_code("AA12");
-		mockAirlines1.setAirline_name("AmericanAirlines");
 		
-		Airlines mockAirlines2 = new Airlines("QA12","QattarAirways");
-		mockAirlines2.setAirline_code("QA12");
-		mockAirlines2.setAirline_name("QattarAirways");
+		doReturn(newAirlines).when(service).saveall(ArgumentMatchers.any());
 		
-		List<Airlines> mockAirlines = new ArrayList<>();
-		mockAirlines.add(mockAirlines1);
-		mockAirlines.add(mockAirlines2);
+		String json = new ObjectMapper().writeValueAsString(newAirlines);
 		
-		doReturn(mockAirlines).when(repository).save(ArgumentMatchers.any());
-		
-		mockMvc.perform(MockMvcRequestBuilders.post("/admin/airlines/add/bulk")
+		mockMvc.perform(MockMvcRequestBuilders.post("/admin/airlines/bulk")
 		.contentType(MediaType.APPLICATION_JSON_VALUE)
 		.content(new ObjectMapper().writeValueAsString(newAirlines)))
 		
 		.andExpect(status().isCreated())
 		.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-		
-		.andExpect(jsonPath("$[0].Airline_code", is("AA12")))
-		.andExpect(jsonPath("$[0].Airline_name", is("AmericanAirlines")))
-		
-		.andExpect(jsonPath("$[1].Airline_code", is("QA12")))
-		.andExpect(jsonPath("$[1].Airline_name", is("QattarAirways")));
+		.andExpect(content().json(json));
 	}
 	
 	//Admin should be able to update an airline
 	//http://localhost:8888/admin/airlines/update/{airline_code}
-	
+	@Test
+	@DisplayName("Test Update Airline")
+	public void testUpdateCity() throws Exception{
+		
+		Airlines newAirline = new Airlines("K12","Kingfisher");
+		
+		String json = new ObjectMapper().writeValueAsString(newAirline);
+		
+		doReturn(newAirline).when(service).updateAirline(ArgumentMatchers.any());
+		
+		mockMvc.perform(put("/admin/airlines/update")
+				// Validate Status should be 200 ok and json response recived
+				.contentType(MediaType.APPLICATION_JSON_VALUE)
+				.content(json).accept(MediaType.APPLICATION_JSON))
+				
+				//Validate Response body
+				
+				.andExpect(status().isCreated())
+				.andExpect(jsonPath("$.airlineCode",is("K12")))
+				.andExpect(jsonPath("$.airlineName",is("Kingfisher")));
 
-}
+}}

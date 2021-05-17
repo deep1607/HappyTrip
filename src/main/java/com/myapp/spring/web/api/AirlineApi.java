@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.myapp.spring.model.Airlines;
+
 import com.myapp.spring.repository.AirlineRepository;
+import com.myapp.spring.service.AirlineService;
 
 @RestController
 @RequestMapping("/admin/airlines")
@@ -25,76 +27,40 @@ public class AirlineApi {
 	@Autowired
 	private AirlineRepository repository;
 
-	//Admin is able to view all airlines
-	//http://localhost:8888/admin/airlines/findAll
-	@GetMapping("/findAll")
-	public ResponseEntity<List<Airlines>> findAllAirlines(){
-		return new ResponseEntity<List<Airlines>>(repository.findAll(),HttpStatus.OK);
-		
-	}
-	
-	//Admin is able to view all airlines
-	//http://localhost:8888/admin/airlines/find/{Airline_name}
-	@GetMapping("/find/{airline_name}")
-	public ResponseEntity<Airlines> findAirlineByName(@PathVariable("airline_name") String airline_name){
-		return new ResponseEntity<Airlines>(repository.findByAirline_name("airline_name").get(),HttpStatus.OK);
-			
-	}
-	
-	//Admin is able to view all airlines
-	//http://localhost:8888/admin/airlines/find/{Airline_code}
-	@GetMapping("/find/{airline_code}")
-	public ResponseEntity<Airlines> findAirlinesByCode(@PathVariable("airline_code") String airline_code){
-		return new ResponseEntity<Airlines>(repository.findByAirline_code("airline_code").get(),HttpStatus.OK);
-			
-	}
-	
-	//Admin should be able to add an airline
-	//http://localhost:8888/admin/airlines/add
-	@PostMapping("/add")
-	public ResponseEntity<Airlines> addNewAirline(@RequestBody Airlines airline){
-		return new ResponseEntity<Airlines>(repository.save(airline),HttpStatus.CREATED);
-		
-	}
-	
-	//Admin should be able to add an airline
-	//http://localhost:8888/admin/airlines/add/bulk
-	@PostMapping("/add/bulk")
-	public ResponseEntity<List<Airlines>> bulkAirlineInsert(@RequestBody List<Airlines> airline){
-		return new ResponseEntity<List<Airlines>>(repository.saveAll(airline),HttpStatus.CREATED);
-			
-	}
-	
-	//Admin should be able to update an airline
-	//http://localhost:8888/admin/airlines/update/{airline_code}
-	@PutMapping("/update/{airline_code}")
-	public ResponseEntity<Airlines> updateAirlinesByCode(@PathVariable("airline_code") String airline_code,
-			@RequestBody Airlines airline){
-			
-	Airlines existingAirline = repository.findByAirline_code(airline_code).get();	
-			
-	BeanUtils.copyProperties(airline, existingAirline);
-			
-	return new ResponseEntity<Airlines>(repository.save(existingAirline),
-			HttpStatus.CREATED);
-			
-	}
-	
-	//Admin should be able to update an airline
-	//http://localhost:8888/admin/airlines/update/{airline_name}
-	@PutMapping("/update/{airline_name}")
-	public ResponseEntity<Airlines> updateAirlinesByName(@PathVariable("airline_name") String airline_name,
-			@RequestBody Airlines airline){
-			
-	Airlines existingAirline = repository.findByAirline_name(airline_name).get();	
-			
-	BeanUtils.copyProperties(airline, existingAirline);
-			
-	return new ResponseEntity<Airlines>(repository.save(existingAirline),
-			HttpStatus.CREATED);
-			
-	}
+	@Autowired
+	private AirlineService service;
 
+	@PostMapping
+	public ResponseEntity<Airlines> saveNewAirline(@RequestBody Airlines airline){
+
+	return new ResponseEntity<Airlines>(repository.save(airline),HttpStatus.CREATED);
 	
+	}
+	@PostMapping("/bulk")
+	public ResponseEntity<List<Airlines>> bulkProuctsInsert(@RequestBody List<Airlines> airline){
+
+	return new ResponseEntity<List<Airlines>>(service.saveall(airline),HttpStatus.CREATED);
+	}
+	
+	@GetMapping
+	public ResponseEntity<List<Airlines>> viewall(){
+		
+		return new ResponseEntity<List<Airlines>>(repository.viewairline(),HttpStatus.OK);	
+	}
+	
+	@GetMapping("findAirline/code:{id}")
+	public ResponseEntity<Airlines> findByAirlineCode(@PathVariable("id") String id){
+		return new ResponseEntity<Airlines>(repository.findByAirlineCode(id).get(),HttpStatus.OK);
+	}
+	@GetMapping("findAirline/airline:{name}")
+	public ResponseEntity<Airlines> findByAirlineName(@PathVariable("name") String name){
+		return new ResponseEntity<Airlines>(repository.findByAirlineName(name).get(),HttpStatus.OK);
+	}
+	@PutMapping("update")
+	public ResponseEntity<Airlines> updateAirlinebyid(
+			@RequestBody Airlines airline){
+	
+	return new ResponseEntity<Airlines>(service.updateAirline(airline),HttpStatus.CREATED);
+	}
 	
 }
