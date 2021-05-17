@@ -20,7 +20,6 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.myapp.spring.model.Booking;
 
-
 @SpringBootTest
 public class BookingRepositoryTest {
 
