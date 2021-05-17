@@ -69,10 +69,6 @@ public class LoginIntegrationTest {
 				
 				//Login mockUser =new Login("abc","12345");
 				
-				//mockUser.setLogin();
-				
-				//doReturn(mockUser).when(repository).save(ArgumentMatchers.any());
-				
 				// Perform GET Request
 				
 				mockMvc.perform(MockMvcRequestBuilders.post("/admin/login")
