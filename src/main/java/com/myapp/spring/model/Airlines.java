@@ -50,6 +50,37 @@ public class Airlines {
 		Airline_name = airline_name;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((Airline_code == null) ? 0 : Airline_code.hashCode());
+		result = prime * result + ((Airline_name == null) ? 0 : Airline_name.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Airlines other = (Airlines) obj;
+		if (Airline_code == null) {
+			if (other.Airline_code != null)
+				return false;
+		} else if (!Airline_code.equals(other.Airline_code))
+			return false;
+		if (Airline_name == null) {
+			if (other.Airline_name != null)
+				return false;
+		} else if (!Airline_name.equals(other.Airline_name))
+			return false;
+		return true;
+	}
+
 //	public String getAirline_logo() {
 //		return Airline_logo;
 //	}

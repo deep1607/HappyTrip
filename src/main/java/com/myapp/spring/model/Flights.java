@@ -21,10 +21,10 @@ public class Flights {
 	@Column(name="Associated_airline",nullable=false,unique = true)
 	private String Associated_airline;
 	
-	@Column(name="Class_available",nullable=false,unique = true)
+	@Column(name="Class_available",nullable=false)
 	private String Class_available;
 
-	@Column(name="number_of_seats")
+	@Column(name="number_of_seats",nullable=false)
 	private Number number_of_seats;
 
 	public Flights(Number flight_number, String flight_name, String associated_airline, String class_available,
@@ -78,6 +78,55 @@ public class Flights {
 
 	public void setNumber_of_seats(Number number_of_seats) {
 		this.number_of_seats = number_of_seats;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((Associated_airline == null) ? 0 : Associated_airline.hashCode());
+		result = prime * result + ((Class_available == null) ? 0 : Class_available.hashCode());
+		result = prime * result + ((Flight_name == null) ? 0 : Flight_name.hashCode());
+		result = prime * result + ((Flight_number == null) ? 0 : Flight_number.hashCode());
+		result = prime * result + ((number_of_seats == null) ? 0 : number_of_seats.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Flights other = (Flights) obj;
+		if (Associated_airline == null) {
+			if (other.Associated_airline != null)
+				return false;
+		} else if (!Associated_airline.equals(other.Associated_airline))
+			return false;
+		if (Class_available == null) {
+			if (other.Class_available != null)
+				return false;
+		} else if (!Class_available.equals(other.Class_available))
+			return false;
+		if (Flight_name == null) {
+			if (other.Flight_name != null)
+				return false;
+		} else if (!Flight_name.equals(other.Flight_name))
+			return false;
+		if (Flight_number == null) {
+			if (other.Flight_number != null)
+				return false;
+		} else if (!Flight_number.equals(other.Flight_number))
+			return false;
+		if (number_of_seats == null) {
+			if (other.number_of_seats != null)
+				return false;
+		} else if (!number_of_seats.equals(other.number_of_seats))
+			return false;
+		return true;
 	}
 
 
