@@ -44,12 +44,12 @@ public class FlightsRepositoryTest {
 	}
 
 	@Test
-	@DisplayName("Test Flights not found for a non existing airline_code")
+	@DisplayName("Test Flights not found for a non existing flight_number")
 	public void testFlightsNotFoundForNonExistingCode() {
 	
-		Flights flights = repository.findById(5).orElseGet(() -> new Flights());
+		Flights flights=repository.findById(12).orElseGet(() -> new Flights());
 
-		Assertions.assertNull(flights.getFlight_number(), "Flight with Id 5 does not exist");
+		Assertions.assertNotEquals(flights.getFlightNumber(), "Flight with Number 12 does not exist");
 	
 	}
 	
@@ -59,47 +59,22 @@ public class FlightsRepositoryTest {
 	public void testAirlinesSavedSuccessfully() {
 	
 		Flights flight = new Flights(3,"BRIT","BritishAirways","Business",100);
-		flight.setFlight_number(3);
-		flight.setFlight_name("BRIT");
-		flight.setAssociated_airline("BritishAirways");
-		flight.setClass_available("Business");
-		flight.setNumber_of_seats(100);
 		
-
 		Flights savedFlight = repository.save(flight);
 
 		Assertions.assertNotNull(savedFlight,"New Flight should be saved");
 	
-		Assertions.assertNotNull(savedFlight.getFlight_number(),"New Flight should have Number");
+		Assertions.assertNotNull(savedFlight.getFlightNumber(),"New Flight should have Number");
 		
-		Assertions.assertEquals(flight.getFlight_name(), savedFlight.getFlight_name());
-		Assertions.assertEquals(flight.getFlight_number(), savedFlight.getFlight_number());
-		Assertions.assertEquals(flight.getAssociated_airline(), savedFlight.getAssociated_airline());
-		Assertions.assertEquals(flight.getClass_available(), savedFlight.getClass_available());
-		Assertions.assertEquals(flight.getNumber_of_seats(), savedFlight.getNumber_of_seats());
+		Assertions.assertEquals(flight.getFlightName(), savedFlight.getFlightName());
+		Assertions.assertEquals(flight.getFlightNumber(), savedFlight.getFlightNumber());
+		Assertions.assertEquals(flight.getAssociatedAirline(), savedFlight.getAssociatedAirline());
+		Assertions.assertEquals(flight.getClassAvailable(), savedFlight.getClassAvailable());
+		Assertions.assertEquals(flight.getNumberOfSeats(), savedFlight.getNumberOfSeats());
 	
 	}
 	
-	@Test
-	@DisplayName("Test Flight updated successfully")
-	public void testFlightsUpdatedSuccessfully() {
 	
-		Flights flight = new Flights(3,"BRIT","BritishAirways","Business",100);
-		flight.setFlight_number(3);
-		flight.setFlight_name("BRIT");
-		flight.setAssociated_airline("BritishAirways");
-		flight.setClass_available("Business");
-		flight.setNumber_of_seats(100);
-		
-
-		Flights updatedFlight = repository.save(flight);
-		
-		Assertions.assertEquals(flight.getFlight_name(), updatedFlight.getFlight_name());
-		Assertions.assertEquals(flight.getFlight_number(), updatedFlight.getFlight_number());
-		Assertions.assertEquals(flight.getAssociated_airline(), updatedFlight.getAssociated_airline());
-		Assertions.assertEquals(flight.getClass_available(), updatedFlight.getClass_available());
-		Assertions.assertEquals(flight.getNumber_of_seats(), updatedFlight.getNumber_of_seats());
-	}
 	
 	
 }

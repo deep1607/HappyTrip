@@ -1,18 +1,18 @@
 [
 	{
-		"Flight_number": 1,
-		"Flight_name": "QATT",
-		"Associated_airline": "QattarAirways",
-		"Class_available": "Business",
-		"number_of_seats": 100
+		"flightNumber": 1,
+		"flightName": "QATT",
+		"associatedAirline": "QattarAirways",
+		"classAvailable": "Business",
+		"numberOfSeats": 100
 	},
 	
 	{
-		"Flight_number": 2,
-		"Flight_name": "AIR",
-		"Associated_airline": "AirIndia",
-		"Class_available": "Economy",
-		"number_of_seats": 300
+		"flightNumber": 2,
+		"flightName": "AIR",
+		"associatedAirline": "AirIndia",
+		"classAvailable": "Economy",
+		"numberOfSeats": 300
 	}
 	
 ]

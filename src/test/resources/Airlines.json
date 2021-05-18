@@ -1,22 +1,22 @@
 [
 	{
-		"Airline_code": "K12",
-		"Airline_name": "Kingfisher"
+		"airlineCode": "K12",
+		"airlineName": "Kingfisher"
 	},
 	
 	{
-		"Airline_code": "EA12",
-		"Airline_name": "EithaadArirways"
+		"airlineCode": "EA12",
+		"airlineName": "EithaadArirways"
 	},
 	
 	{
-		"Airline_code": "AI12",
-		"Airline_name": "AirIndia"
+		"airlineCode": "AI12",
+		"airlineName": "AirIndia"
 	},
 	
 	{
-		"Airline_code": "BA12",
-		"Airline_name": "BritishAirlines"
+		"airlineCode": "BA12",
+		"airlineName": "BritishAirlines"
 	}
 		
 	
