@@ -2,11 +2,11 @@ package com.myapp.spring.user.web.api;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.Mockito.doReturn;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
-import java.sql.Time;
-
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentMatchers;
@@ -17,10 +17,9 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.myapp.spring.user.model.Booking;
-import com.myapp.spring.user.model.Search;
 import com.myapp.spring.user.repository.BookingRepository;
 import com.myapp.spring.user.repository.SearchRepository;
 import com.myapp.spring.user.service.BookingService;
@@ -53,10 +52,10 @@ public class BookingAPITest {
 		//Prepare Mock Product
 		java.sql.Date date = java.sql.Date.valueOf("2021-01-05");
 		Booking newuserbooking = new Booking(3,"vibhor", "21st june", "DELHI", "MUMBAI", date, 4, 6);
-				
-		java.sql.Time arrtime = Time.valueOf("12:00:00");		
-		Search searchuserbooking = new Search(6,"jetairways","DELHI", "MUMBAI",date,arrtime,arrtime,4000.00,50);
-				
+//				
+//		java.sql.Time arrtime = Time.valueOf("12:00:00");		
+//		Search searchuserbooking = new Search(6,"jetairways","DELHI", "MUMBAI",date,arrtime,arrtime,4000.00,50);
+//				
 				//mockUser.setLogin();
 				
 				// Prepare Mock Service Method

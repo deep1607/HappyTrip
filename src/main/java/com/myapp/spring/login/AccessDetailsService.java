@@ -19,9 +19,7 @@ public class AccessDetailsService implements UserDetailsService {
             throws UsernameNotFoundException {
         Optional<Access> user = userRepository.findByEmail(email);
          
-        if (user == null) {
-            throw new UsernameNotFoundException("Could not find user");
-        }
+        user.orElseThrow(() -> new UsernameNotFoundException("Not found: " + email));
          
         return user.map(AccessDetails::new).get();
     }

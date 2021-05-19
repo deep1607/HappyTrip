@@ -17,7 +17,6 @@ import com.fasterxml.jackson.core.io.JsonEOFException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.myapp.spring.admin.model.City;
-import com.myapp.spring.admin.repository.CityRepository;
 
 @SpringBootTest
 public class CityRepositoryTest {

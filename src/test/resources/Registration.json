@@ -2,7 +2,7 @@
 {
 "id":"1",
 "email":"ravikumar@gmail.com",
-"password":"ravi2021",
+"password":"$2a$10$iEesXqSW3fE4xyMvVfnQL.oKYZ4dFgIvHSuIUoBpTleSpozX7CXU.",
 "firstName":"ravi",
 "lastName":"kumar",
 "role":"ADMIN",

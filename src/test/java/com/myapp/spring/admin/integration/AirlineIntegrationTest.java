@@ -2,7 +2,9 @@ package com.myapp.spring.admin.integration;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,6 +12,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -27,7 +30,6 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.myapp.spring.admin.model.Airlines;
 import com.myapp.spring.admin.repository.AirlineRepository;
-import com.myapp.spring.admin.service.AirlineService;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -37,8 +39,8 @@ public class AirlineIntegrationTest {
 	@Autowired
 	private AirlineRepository repository;
 	
-	@Autowired
-	private AirlineService service;
+//	@Autowired
+//	private AirlineService service;
 	
 	@Autowired
 	private MockMvc mockMvc;

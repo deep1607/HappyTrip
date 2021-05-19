@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.myapp.spring.user.model.Booking;
-import com.myapp.spring.user.model.Search;
 import com.myapp.spring.user.repository.BookingRepository;
 import com.myapp.spring.user.repository.SearchRepository;
 
@@ -30,7 +29,7 @@ public class BookingService {
 		int flightno =bookingInfo.getFlightNo();
 		
 		try {
-		Search search = srepository.checkingSeatAvail(fromcity, tocity, date, seats,flightno).get();
+		srepository.checkingSeatAvail(fromcity, tocity, date, seats,flightno).get();
 		}catch(Exception e){
 			Booking empty = new Booking(0, "", "", "", "", null,0, 0);
 			return empty;

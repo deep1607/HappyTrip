@@ -2,8 +2,6 @@ package com.myapp.spring.user.model;
 
 import java.sql.Date;
 import java.sql.Time;
-import java.util.Objects;
-
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

@@ -1,7 +1,6 @@
 package com.myapp.spring.user.integration;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.mockito.Mockito.doReturn;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -11,17 +10,14 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.Arrays;
-import java.util.Optional;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentMatchers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -70,7 +66,7 @@ public void cleanUp() {
 		Profile profile =new Profile(2,"Aashi V","Female","9Nov","aashi598@gmail.com","NFL guna","madhya pradesh","GUNA","INDIA",123333,473111);
 		
 		//profile.setEmail();
-		String Email="aashi598@gmail.com";
+		String Email=profile.getEmail();
 		// Prepare Mock Service Method
 		
 		//doReturn(Optional.of(profile)).when(repository).findByEmail(Email);

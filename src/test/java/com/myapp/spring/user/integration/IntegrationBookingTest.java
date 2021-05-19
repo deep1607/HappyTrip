@@ -1,39 +1,33 @@
 package com.myapp.spring.user.integration;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.mockito.Mockito.doReturn;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
-import java.sql.Time;
 import java.util.Arrays;
-
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentMatchers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.myapp.spring.user.model.Booking;
 import com.myapp.spring.user.model.Search;
-import com.myapp.spring.user.repository.BookingRepository;
 import com.myapp.spring.user.repository.SearchRepository;
-import com.myapp.spring.user.service.BookingService;
 
 
 @SpringBootTest
@@ -41,12 +35,12 @@ import com.myapp.spring.user.service.BookingService;
 
 public class IntegrationBookingTest {
 	
-	@Autowired
-	private BookingRepository brepository;
-	
-	@Autowired
-	private BookingService services;
-	
+//	@Autowired
+//	private BookingRepository brepository;
+//	
+//	@Autowired
+//	private BookingService services;
+//	
 	@Autowired
 	private SearchRepository repository;
 	
@@ -79,7 +73,7 @@ public class IntegrationBookingTest {
 		Booking newuserbooking = new Booking(4,"vibhor", "21st june","Delhi","Mumbai", date, 4, 4);
 		
 		
-		String json = new ObjectMapper().writeValueAsString(newuserbooking);
+		//String json = new ObjectMapper().writeValueAsString(newuserbooking);
 				
 				mockMvc.perform(post("/user/booking")
 				// Validate Status should be 200 ok and json response recived
