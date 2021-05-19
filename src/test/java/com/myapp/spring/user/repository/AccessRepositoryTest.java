@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.Arrays;
 
+import javax.print.DocFlavor.SERVICE_FORMATTED;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,6 +28,8 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.myapp.spring.login.Access;
+import com.myapp.spring.login.AccessDetails;
+import com.myapp.spring.login.AccessDetailsService;
 import com.myapp.spring.login.AccessRepository;
 import com.myapp.spring.login.LoginInfo;
 
@@ -36,6 +40,9 @@ public class AccessRepositoryTest {
  
 	@Autowired
 	private AccessRepository repository;
+	
+	@Autowired
+	private AccessDetailsService service;
 	
 	
 private static File DATA_JSON= Paths.get("src","test","resources","Registration.json").toFile();
@@ -59,7 +66,7 @@ public void cleanUp() {
 @DisplayName("Test user saved sucessfully")
 public void testProductSavedSucessfully() {
 	
-	Access user =new Access(1,"deep@mail.com","pass","USER",true,"Deep","Shah");
+	Access user =new Access(2,"deep@mail.com","pass","USER",true,"Deep","Shah");
 	
 	Access savedUser =repository.save(user);
 	Assertions.assertNotNull(savedUser," New user should be saved");
@@ -69,6 +76,42 @@ public void testProductSavedSucessfully() {
 	Assertions.assertEquals(user.getFirstName(), savedUser.getFirstName());
 	
 }
+
+@Test
+@DisplayName("Testing repository funtions")
+public void testfunction() {
+	
+	Access admin =new Access(1,"ravikumar@gmail.com","ravi2021","ADMIN",true,"ravi","kumar");
+	
+	String email =admin.getEmail();
+	
+	Access admin2= repository.findByEmail(email).get();
+	
+	Assertions.assertNotNull(admin2," Admin found");
+	
+	Assertions.assertNotNull(admin2.getId()," Admin should have id");
+	
+	Assertions.assertEquals(admin.getFirstName(), admin2.getFirstName());
+	
+}
+////@Test
+//@DisplayName("Testing service function")
+//public void testService() {
+//	
+//	Access admin =new Access(1,"ravikumar@gmail.com","ravi2021","ADMIN",true,"ravi","kumar");
+//	
+//	String email =admin.getEmail();
+//	
+//	AccessDetails admin2=service.loadUserByUsername(email);
+//			
+//	Assertions.assertNotNull(admin2," Admin found");
+//	
+//	Assertions.assertNotNull(admin2.getUsername()," Admin should have id");
+//	
+//	Assertions.assertEquals(admin.getEmail(), admin2.getUsername());
+//	
+//}
+     
      
 
          

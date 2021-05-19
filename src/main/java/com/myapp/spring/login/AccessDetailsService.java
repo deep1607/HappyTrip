@@ -1,10 +1,14 @@
 package com.myapp.spring.login;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
- 
+import org.springframework.stereotype.Service;
+
+@Service
 public class AccessDetailsService implements UserDetailsService {
  
     @Autowired
@@ -13,13 +17,13 @@ public class AccessDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email)
             throws UsernameNotFoundException {
-        Access user = userRepository.findByEmail(email).get();
+        Optional<Access> user = userRepository.findByEmail(email);
          
         if (user == null) {
             throw new UsernameNotFoundException("Could not find user");
         }
          
-        return new AccessDetails(user);
+        return user.map(AccessDetails::new).get();
     }
  
 }

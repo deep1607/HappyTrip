@@ -19,7 +19,7 @@ public class RegistrationService {
 		email =admin.getEmail();
 		String password;
 		password= admin.getPassword();
-		String role ="ADMIN";
+		String role ="ROLE_ADMIN";
 		boolean activity=true;
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 	    String encodedPassword = passwordEncoder.encode(password);
@@ -36,7 +36,7 @@ public LoginInfo registerU(LoginInfo user) {
 		email =user.getEmail();
 		String password;
 		password= user.getPassword();
-		String role ="USER";
+		String role ="ROLE_USER";
 		boolean activity=true;
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 	    String encodedPassword = passwordEncoder.encode(password);
