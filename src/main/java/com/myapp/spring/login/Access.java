@@ -20,7 +20,7 @@ public class Access {
     private String password;
     
     @Column(name="Role")
-    private String Role;
+    private String role;
     
     @Column(name="Active")
     private boolean active;
@@ -32,22 +32,31 @@ public class Access {
     private String lastName;
 
 	
-    
-	public Access(int id, String email, String password, String role, boolean active, String firstName,
-			String lastName) {
-		this.id = id;
-		this.email = email;
-		this.password = password;
-		Role = role;
-		this.active = active;
-		this.firstName = firstName;
-		this.lastName = lastName;
+  
+
+	public Access(int id, String email, String password, String role, boolean active, String firstName, String lastName) {
+	this.id = id;
+	this.email = email;
+	this.password = password;
+	this.role = role;
+	this.active = active;
+	this.firstName = firstName;
+	this.lastName = lastName;
+}
+
+
+
+	public String getRole() {
+		return role;
 	}
-
-
 
 	public int getId() {
 		return id;
+	}
+
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 
@@ -82,15 +91,6 @@ public class Access {
 
 
 
-	public String getRole() {
-		return Role;
-	}
-
-
-
-	public void setRole(String role) {
-		Role = role;
-	}
 
 
 

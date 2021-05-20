@@ -32,20 +32,20 @@ public class ProfileAPI{
 	   public ResponseEntity<Profile> viewProfile(
 		  @PathVariable String email){
 			
-			return new ResponseEntity<Profile>(repository.findByEmail(email).get(),HttpStatus.OK);
+		Profile profile = null;
+		if(repository.findByEmail(email).isPresent()) {
+			profile=repository.findByEmail(email).orElseGet(Profile::new);
+		}
+			return new ResponseEntity<>(profile,HttpStatus.OK);
 			
 			}
-		
 
-	
-	
-	
 	
 @PostMapping("profile/add")
     
 	public ResponseEntity<Profile> addNewProfile(@RequestBody Profile profile){
 		
-		return new ResponseEntity<Profile>(repository.save(profile),HttpStatus.CREATED);
+		return new ResponseEntity<>(repository.save(profile),HttpStatus.CREATED);
 		}
    
 }

@@ -29,29 +29,29 @@ public class FlightsApi {
 
 
 	//Admin is able to view all flights
-	//http://localhost:8888/admin/airlines/findAll
+	
 	@GetMapping
 	public ResponseEntity<List<Flights>> findAllFlights(){
-		return new ResponseEntity<List<Flights>>(repository.findAll(),HttpStatus.OK);
+		return new ResponseEntity<>(repository.findAll(),HttpStatus.OK);
 		
 	}
 	
 	//Admin should be able to add a flight
-	//http://localhost:8888/admin/airlines/add
+
 	@PostMapping
 	public ResponseEntity<Flights> addNewFlight(@RequestBody Flights flight){
-		return new ResponseEntity<Flights>(repository.save(flight),HttpStatus.CREATED);
+		return new ResponseEntity<>(repository.save(flight),HttpStatus.CREATED);
 		
 	}
 	
 	
 	//Admin should be able to update a flight
-	//http://localhost:8888/admin/airlines/update/{flight_name}
+	
 	@PutMapping("update")
 	public ResponseEntity<Flights> updateFlights(@RequestBody Flights flight)
 	{
 		
-		return new ResponseEntity<Flights>(service.updateFlight(flight),HttpStatus.CREATED);
+		return new ResponseEntity<>(service.updateFlight(flight),HttpStatus.CREATED);
 		
 	
 			

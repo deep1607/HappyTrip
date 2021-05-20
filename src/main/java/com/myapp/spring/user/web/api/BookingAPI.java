@@ -15,26 +15,14 @@ import com.myapp.spring.user.service.BookingService;
 	@RestController
 	@RequestMapping("user/booking")
 	public class BookingAPI {
-		
-//		//Dependency Injection
-//		@Autowired
-//		private SearchRepository repository;
-//		
-//		@Autowired
-//		private BookingRepository brepository;
-		
+
 		@Autowired
 		private BookingService service;
 		
-		//@GetMapping("/{id}")
-	//	public ResponseEntity<Product> findById(@PathVariable("id") Integer id ){
-		
-		//return new ResponseEntity<Product>(repository.findById(id).get(),HttpStatus.OK);
-		//}
 		@PostMapping
-		public ResponseEntity<Booking> booking(@RequestBody Booking BookingInfo ){
+		public ResponseEntity<Booking> booking(@RequestBody Booking bookingInfo ){
 			
-			return new ResponseEntity<Booking>(service.BookingCheck(BookingInfo),HttpStatus.OK);
+			return new ResponseEntity<>(service.bookingCheck(bookingInfo),HttpStatus.OK);
 		}
 		
 	

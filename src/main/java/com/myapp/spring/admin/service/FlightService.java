@@ -18,7 +18,14 @@ public class FlightService {
 		
 		String id = flight.getFlightName();
 		
-		Flights oldflight = repository.findByFlightName(id).get();
+		
+		
+
+		Flights oldflight = null;
+		if(repository.findByFlightName(id).isPresent()) {
+			oldflight=repository.findByFlightName(id).orElseGet(Flights::new);
+		}
+		
 		
 		BeanUtils.copyProperties(flight, oldflight);
 		

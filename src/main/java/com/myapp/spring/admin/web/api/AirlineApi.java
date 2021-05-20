@@ -31,34 +31,51 @@ public class AirlineApi {
 	@PostMapping
 	public ResponseEntity<Airlines> saveNewAirline(@RequestBody Airlines airline){
 
-	return new ResponseEntity<Airlines>(repository.save(airline),HttpStatus.CREATED);
+	return new ResponseEntity<>(repository.save(airline),HttpStatus.CREATED);
 	
 	}
 	@PostMapping("/bulk")
 	public ResponseEntity<List<Airlines>> bulkProuctsInsert(@RequestBody List<Airlines> airline){
 
-	return new ResponseEntity<List<Airlines>>(service.saveall(airline),HttpStatus.CREATED);
+	return new ResponseEntity<>(service.saveall(airline),HttpStatus.CREATED);
 	}
 	
 	@GetMapping
 	public ResponseEntity<List<Airlines>> viewall(){
 		
-		return new ResponseEntity<List<Airlines>>(repository.viewairline(),HttpStatus.OK);	
+		return new ResponseEntity<>(repository.viewairline(),HttpStatus.OK);	
 	}
 	
 	@GetMapping("findAirline/code:{id}")
 	public ResponseEntity<Airlines> findByAirlineCode(@PathVariable("id") String id){
-		return new ResponseEntity<Airlines>(repository.findByAirlineCode(id).get(),HttpStatus.OK);
+	
+		Airlines airline = null;
+		if(repository.findByAirlineCode(id).isPresent()) {
+			airline=repository.findByAirlineCode(id).orElseGet(Airlines::new);
+		}
+		
+		return new ResponseEntity<>(airline,HttpStatus.OK);
 	}
+	
+	
+	
+	
+	
 	@GetMapping("findAirline/airline:{name}")
 	public ResponseEntity<Airlines> findByAirlineName(@PathVariable("name") String name){
-		return new ResponseEntity<Airlines>(repository.findByAirlineName(name).get(),HttpStatus.OK);
+		
+		Airlines airline = null;
+		if(repository.findByAirlineName(name).isPresent()) {
+			airline=repository.findByAirlineName(name).orElseGet(Airlines::new);
+		}
+					
+		return new ResponseEntity<>(airline,HttpStatus.OK);
 	}
 	@PutMapping("update")
 	public ResponseEntity<Airlines> updateAirlinebyid(
 			@RequestBody Airlines airline){
 	
-	return new ResponseEntity<Airlines>(service.updateAirline(airline),HttpStatus.CREATED);
+	return new ResponseEntity<>(service.updateAirline(airline),HttpStatus.CREATED);
 	}
 	
 }

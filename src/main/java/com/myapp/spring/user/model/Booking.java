@@ -3,6 +3,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.sql.Date; 
 
 	@Entity
 	@Table(name="booking_table")
@@ -14,10 +15,10 @@ import javax.persistence.Table;
 		private int id;
 		
 		@Column(name = "Name")
-		private String Name;
+		private String name;
 
 		@Column(name = "Date_Of_Birth",nullable = false)
-		private String DateOfBirth;
+		private String dateOfBirth;
 		
 		@Column(name = "from_city")
 		private String fromcity;
@@ -26,28 +27,28 @@ import javax.persistence.Table;
 		private String tocity;
 		
 		@Column(name = "Date")
-		private java.sql.Date Date;
+		private Date date;
 		
 		@Column(name = "seats")
 		private int seats;
 		
 		@Column(name = "Flight_No")
-		private int FlightNo;
+		private int flightNo;
 		
-		public Booking() {
-		}
-
-		public Booking(int id, String name, String dateOfBirth, String fromcity, String tocity, java.sql.Date date,
-				int seats, int flightNo) {
-			super();
+		
+		public Booking(int id, String name, String dateOfBirth, String fromcity, String tocity, Date date, int seats,
+				int flightNo) {
 			this.id = id;
-			Name = name;
-			DateOfBirth = dateOfBirth;
+			this.name = name;
+			this.dateOfBirth = dateOfBirth;
 			this.fromcity = fromcity;
 			this.tocity = tocity;
-			Date = date;
+			this.date = date;
 			this.seats = seats;
-			FlightNo = flightNo;
+			this.flightNo = flightNo;
+		}
+
+		public Booking() {
 		}
 
 		public int getId() {
@@ -59,19 +60,19 @@ import javax.persistence.Table;
 		}
 
 		public String getName() {
-			return Name;
+			return name;
 		}
 
 		public void setName(String name) {
-			Name = name;
+			this.name = name;
 		}
 
 		public String getDateOfBirth() {
-			return DateOfBirth;
+			return dateOfBirth;
 		}
 
 		public void setDateOfBirth(String dateOfBirth) {
-			DateOfBirth = dateOfBirth;
+			this.dateOfBirth = dateOfBirth;
 		}
 
 		public String getFromcity() {
@@ -90,12 +91,12 @@ import javax.persistence.Table;
 			this.tocity = tocity;
 		}
 
-		public java.sql.Date getDate() {
-			return Date;
+		public Date getDate() {
+			return date;
 		}
 
-		public void setDate(java.sql.Date date) {
-			Date = date;
+		public void setDate(Date date) {
+			this.date = date;
 		}
 
 		public int getSeats() {
@@ -107,15 +108,13 @@ import javax.persistence.Table;
 		}
 
 		public int getFlightNo() {
-			return FlightNo;
+			return flightNo;
 		}
 
 		public void setFlightNo(int flightNo) {
-			FlightNo = flightNo;
+			this.flightNo = flightNo;
 		}
-		
-		
-		
+
 	}
 
 		

@@ -28,55 +28,66 @@ public class CityApi {
 	@Autowired
 	private CityService service;
 	//Admin can add 1 new city
-	//http://localhost:8888/admin/cities
+	
 	@PostMapping
 	public ResponseEntity<City> saveNewCity(@RequestBody City city){
 
-	return new ResponseEntity<City>(repository.save(city),HttpStatus.CREATED);
+	return new ResponseEntity<>(repository.save(city),HttpStatus.CREATED);
 	
 	}
 	
 	//Admin can add multiple new city
-	//http://localhost:8888/admin/cities/bulk
+	
 	@PostMapping("/bulk")
 	public ResponseEntity<List<City>> bulkProuctsInsert(@RequestBody List<City> city){
 	
 		
 	
-	return new ResponseEntity<List<City>>(service.saveall(city),HttpStatus.CREATED);
+	return new ResponseEntity<>(service.saveall(city),HttpStatus.CREATED);
 	}
 	
 	
 	//Admin Search all cities displayed 
-	//http://localhost:8888/admin/cities
+	
 	@GetMapping
 	public ResponseEntity<List<City>> viewall(){
-		return new ResponseEntity<List<City>>(repository.viewcity(),HttpStatus.OK);	
+		return new ResponseEntity<>(repository.viewcity(),HttpStatus.OK);	
 	}
 	
 	
 	//Admin can find by city id
-	//http://localhost:8888/admin/cities/findCity/id:{id}
+	
 	@GetMapping("findCity/id:{id}")
 	public ResponseEntity<City> findByCityId(@PathVariable("id") String id){
-		return new ResponseEntity<City>(repository.findBycityId(id).get(),HttpStatus.OK);
+		
+		City city = null;
+		if(repository.findBycityId(id).isPresent()) {
+			city=repository.findBycityId(id).orElseGet(City::new);
+		}
+		return new ResponseEntity<>(city,HttpStatus.OK);
 	}
 	
 	
 	//Admin can find by city name
-	//http://localhost:8888/admin/cities/findCity/city:{city}
+	
 	@GetMapping("findCity/city:{name}")
 	public ResponseEntity<City> findByCityName(@PathVariable("name") String name){
-		return new ResponseEntity<City>(repository.findBycityName(name).get(),HttpStatus.OK);
+		
+		City city = null;
+		if(repository.findBycityName(name).isPresent()) {
+			city=repository.findBycityName(name).orElseGet(City::new);
+		}
+		
+		return new ResponseEntity<>(city,HttpStatus.OK);
 	}
 	
 	//Admin can Update City Name
-		//http://localhost:8888/admin/cities/Update/city:{city}
+	
 		@PutMapping("update")
 		public ResponseEntity<City> updatecitybyid(
 				@RequestBody City city){
 		
-		return new ResponseEntity<City>(service.updateCity(city),HttpStatus.CREATED);
+		return new ResponseEntity<>(service.updateCity(city),HttpStatus.CREATED);
 		}
 		
 		

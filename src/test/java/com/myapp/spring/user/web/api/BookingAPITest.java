@@ -61,7 +61,7 @@ public class BookingAPITest {
 				// Prepare Mock Service Method
 				
 				
-				doReturn(newuserbooking).when(services).BookingCheck(ArgumentMatchers.any());
+				doReturn(newuserbooking).when(services).bookingCheck(ArgumentMatchers.any());
 				
 				// Perform GET Request
 				

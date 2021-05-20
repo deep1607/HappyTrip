@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class RegistrationAPI {
 	
-//	@Autowired
-//	private AccessRepository repository;
 	
 	@Autowired
 	private RegistrationService service;
@@ -19,12 +17,12 @@ public class RegistrationAPI {
 	@PostMapping("/access")
 	public ResponseEntity<LoginInfo> adminRegistration(@RequestBody LoginInfo loginInfo){
 		
-		return new ResponseEntity<LoginInfo>(service.registerA(loginInfo),HttpStatus.CREATED);
+		return new ResponseEntity<>(service.registerA(loginInfo),HttpStatus.CREATED);
 	}
 	@PostMapping("/register")
     
 	public ResponseEntity<LoginInfo> userRegistration(@RequestBody LoginInfo loginInfo){
 		
-		return new ResponseEntity<LoginInfo>(service.registerU(loginInfo),HttpStatus.CREATED);
+		return new ResponseEntity<>(service.registerU(loginInfo),HttpStatus.CREATED);
 		}
 }

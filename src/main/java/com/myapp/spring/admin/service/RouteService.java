@@ -26,7 +26,12 @@ public class RouteService {
 
 		String toCity = route.getToCity();
 
-		RouteModel oldRoute = repository.findByFromCityAndToCity(fromCity, toCity).get();
+		
+		RouteModel oldRoute = null;
+		if(repository.findByFromCityAndToCity(fromCity, toCity).isPresent()) {
+			oldRoute=repository.findByFromCityAndToCity(fromCity, toCity).orElseGet(RouteModel::new);
+		}
+		
 		
 		BeanUtils.copyProperties(route, oldRoute);
 

@@ -1,5 +1,6 @@
 package com.myapp.spring.user.web.api;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,16 +23,25 @@ public class SearchAPI {
 		    (@PathVariable String fromCity,
 		    @PathVariable String toCity,
 		    @PathVariable Date date){
-			return new ResponseEntity<List<Search>>(
-			repository.findByFromCityAndToCityAndDateOrderByCostAsc(fromCity,toCity,date).get(),HttpStatus.OK);} 
-
+			
+			 List<Search> search = new ArrayList<>();
+				if(repository.findByFromCityAndToCityAndDateOrderByCostAsc(fromCity,toCity,date).isPresent()) {
+					search=repository.findByFromCityAndToCityAndDateOrderByCostAsc(fromCity,toCity,date).get();
+				}
+			 return new ResponseEntity<>(search,HttpStatus.OK);
+			 }
 		 
 		 @GetMapping("/search/flight/{fromCity}/{toCity}/{date}")
 		    public ResponseEntity<List<Search>> findFlightByUnRegisteredUserWithCitiesAndDate
 		    (@PathVariable String fromCity,
 		    @PathVariable String toCity,
 		    @PathVariable Date date){
-			return new ResponseEntity<List<Search>>(
-			repository.findByFromCityAndToCityAndDateOrderByCostAsc(fromCity,toCity,date).get(),HttpStatus.OK);}   
+			 
+			 
+			 List<Search> search = new ArrayList<>();
+				if(repository.findByFromCityAndToCityAndDateOrderByCostAsc(fromCity,toCity,date).isPresent()) {
+					search=repository.findByFromCityAndToCityAndDateOrderByCostAsc(fromCity,toCity,date).get();
+				}
+			 return new ResponseEntity<>(search,HttpStatus.OK);
+		 }
 }
-

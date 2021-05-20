@@ -24,7 +24,11 @@ public class CityService {
 		
 		String id = city.getCityId();
 		
-		City oldCity = repository.findBycityId(id).get();
+		
+		City oldCity = null;
+		if(repository.findBycityId(id).isPresent()) {
+			oldCity=repository.findBycityId(id).orElseGet(City::new);
+		}
 		
 		BeanUtils.copyProperties(city, oldCity);
 		

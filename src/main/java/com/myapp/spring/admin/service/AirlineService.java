@@ -24,8 +24,10 @@ public class AirlineService {
 		
 		String id = airline.getAirlineCode();
 		
-		Airlines oldAirline = repository.findByAirlineCode(id).get();
-		
+		Airlines oldAirline = null;
+		if(repository.findByAirlineCode(id).isPresent()) {
+			oldAirline=repository.findByAirlineCode(id).orElseGet(Airlines::new);
+		}
 		BeanUtils.copyProperties(airline, oldAirline);
 		
 		return repository.save(oldAirline);
