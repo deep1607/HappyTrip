@@ -10,7 +10,7 @@
 	{
 		"id":2,
 		"email":"def@email.com",
-		"password":"76842",
+		"password":"76842y",
 		"firstName":"def56",
 		"lastName":"123def"
 	},
@@ -18,7 +18,7 @@
 	{
 		"id":3,
 		"email":"xyz@email.com",
-		"password":"2627",
+		"password":"x2627",
 		"firstName":"xyz26",
 		"lastName":"27xyz"
 	}
