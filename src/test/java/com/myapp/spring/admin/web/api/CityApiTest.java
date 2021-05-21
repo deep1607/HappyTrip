@@ -103,10 +103,9 @@ public class CityApiTest {
 	public void testUpdateCity() throws Exception{
 		
 		City newcity=new City("MUM","Mumbai");
-		
 		doReturn(newcity).when(service).updateCity(ArgumentMatchers.any());
 		
-	    
+		
 		 String json = new ObjectMapper().writeValueAsString(newcity);
 		
 		mockMvc.perform(put("/admin/cities/update")
