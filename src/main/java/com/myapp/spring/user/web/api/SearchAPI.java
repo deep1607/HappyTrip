@@ -25,8 +25,10 @@ public class SearchAPI {
 		    @PathVariable Date date){
 			
 			 List<Search> search = new ArrayList<>();
+			 List<Search> empty = new ArrayList<>();
+			 
 				if(repository.findByFromCityAndToCityAndDateOrderByCostAsc(fromCity,toCity,date).isPresent()) {
-					search=repository.findByFromCityAndToCityAndDateOrderByCostAsc(fromCity,toCity,date).get();
+					search=repository.findByFromCityAndToCityAndDateOrderByCostAsc(fromCity,toCity,date).orElse(empty);
 				}
 			 return new ResponseEntity<>(search,HttpStatus.OK);
 			 }
@@ -37,10 +39,11 @@ public class SearchAPI {
 		    @PathVariable String toCity,
 		    @PathVariable Date date){
 			 
-			 
+			 List<Search> empty = new ArrayList<>();
+			
 			 List<Search> search = new ArrayList<>();
 				if(repository.findByFromCityAndToCityAndDateOrderByCostAsc(fromCity,toCity,date).isPresent()) {
-					search=repository.findByFromCityAndToCityAndDateOrderByCostAsc(fromCity,toCity,date).get();
+					search=repository.findByFromCityAndToCityAndDateOrderByCostAsc(fromCity,toCity,date).orElse(empty);
 				}
 			 return new ResponseEntity<>(search,HttpStatus.OK);
 		 }
