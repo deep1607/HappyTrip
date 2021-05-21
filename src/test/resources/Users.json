@@ -5,7 +5,21 @@
 		"password":"12345",
 		"firstName":"abc12",
 		"lastName":"abc"
+	},
+	
+	{
+		"id":2,
+		"email":"def@email.com",
+		"password":"76842",
+		"firstName":"def56",
+		"lastName":"123def"
+	},
+	
+	{
+		"id":3,
+		"email":"xyz@email.com",
+		"password":"2627",
+		"firstName":"xyz26",
+		"lastName":"27xyz"
 	}
-	
-	
 ]
