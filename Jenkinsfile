@@ -2,7 +2,7 @@ node {
    def mvnHome
    stage('Prepare') {
       git url: 'https://github.com/deep1607/HappyTrip.git', branch: 'Main-Module'
-      mvnHome = tool 'Maven'
+      mvnHome = tool 'mvn'
    }
    stage('Build') {
       if (isUnix()) {
@@ -34,7 +34,7 @@ node {
    stage('Publish') {
       def server = Artifactory.server 'Artifactory'
       def rtMaven = Artifactory.newMavenBuild()
-      rtMaven.tool = 'maven3'
+      rtMaven.tool = 'mvn'
       rtMaven.resolver server: server, releaseRepo: 'libs-release', snapshotRepo: 'libs-snapshot'
       rtMaven.deployer server: server, releaseRepo: 'libs-release-local', snapshotRepo: 'libs-snapshot-local'
       rtMaven.deployer.artifactDeploymentPatterns.addInclude("*stubs*")
