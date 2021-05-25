@@ -34,7 +34,7 @@ node {
    stage('Publish') {
       def server = Artifactory.server 'Artifactory'
       def rtMaven = Artifactory.newMavenBuild()
-      rtMaven.tool = 'M3'
+      rtMaven.tool = 'maven3'
       rtMaven.resolver server: server, releaseRepo: 'libs-release', snapshotRepo: 'libs-snapshot'
       rtMaven.deployer server: server, releaseRepo: 'libs-release-local', snapshotRepo: 'libs-snapshot-local'
       rtMaven.deployer.artifactDeploymentPatterns.addInclude("*stubs*")
