@@ -37,8 +37,7 @@ node {
       rtMaven.tool = 'mvn'
       rtMaven.resolver server: server, releaseRepo: 'libs-release', snapshotRepo: 'libs-snapshot'
       rtMaven.deployer server: server, releaseRepo: 'libs-release-local', snapshotRepo: 'libs-snapshot-local'
-      def buildInfo = rtMaven.run pom: 'pom.xml', goals: 'release:clean release:prepare release:perform'
-      rtMaven.deployer.deployArtifacts buildInfo
+      def buildInfo = rtMaven.run pom: 'pom.xml', goals: 'install'
       server.publishBuildInfo buildInfo
     }
    
