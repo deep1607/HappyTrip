@@ -23,17 +23,6 @@ node {
      }
    }
    
-   stage('Publish') {
-      def server = Artifactory.server 'artifactory'
-      def rtMaven = Artifactory.newMavenBuild()
-      rtMaven.tool = 'Maven'
-      rtMaven.resolver server: server, releaseRepo: 'libs-release', snapshotRepo: 'libs-snapshot'
-      rtMaven.deployer server: server, releaseRepo: 'libs-release-local', snapshotRepo: 'libs-snapshot-local'
-      rtMaven.deployer.artifactDeploymentPatterns.addInclude("*stubs*")
-      def buildInfo = rtMaven.run pom: 'person-service/pom.xml', goals: 'clean install'
-      rtMaven.deployer.deployArtifacts buildInfo
-      server.publishBuildInfo buildInfo
-    }
    stage('Sonar') {
       if (isUnix()) {
          sh "'${mvnHome}/bin/mvn' sonar:sonar"
@@ -41,6 +30,19 @@ node {
          bat(/"${mvnHome}\bin\mvn" sonar:sonar/)
       }
    }
+   
+   stage('Publish') {
+      def server = Artifactory.server 'artifactory'
+      def rtMaven = Artifactory.newMavenBuild()
+      rtMaven.tool = 'Maven'
+      rtMaven.resolver server: server, releaseRepo: 'libs-release', snapshotRepo: 'libs-snapshot'
+      rtMaven.deployer server: server, releaseRepo: 'libs-release-local', snapshotRepo: 'libs-snapshot-local'
+      rtMaven.deployer.artifactDeploymentPatterns.addInclude("*stubs*")
+      def buildInfo = rtMaven.run pom: 'HappyTrip/pom.xml', goals: 'clean install'
+      rtMaven.deployer.deployArtifacts buildInfo
+      server.publishBuildInfo buildInfo
+    }
+   
 stage('Deploy'){
 sh 'curl -u admin:admin -T target/**.war "http://localhost:7080/manager/text/deploy?path=/TeamB&update=true"'
 }
