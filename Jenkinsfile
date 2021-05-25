@@ -38,7 +38,7 @@ node {
       rtMaven.resolver server: server, releaseRepo: 'libs-release', snapshotRepo: 'libs-snapshot'
       rtMaven.deployer server: server, releaseRepo: 'libs-release-local', snapshotRepo: 'libs-snapshot-local'
       rtMaven.deployer.artifactDeploymentPatterns.addInclude("*stubs*")
-      def buildInfo = rtMaven.run pom: 'HappyTrip/pom.xml', goals: 'clean install'
+      def buildInfo = rtMaven.run pom: 'pom.xml', goals: 'clean install'
       rtMaven.deployer.deployArtifacts buildInfo
       server.publishBuildInfo buildInfo
     }
