@@ -32,7 +32,7 @@ node {
    }
    
    stage('Publish') {
-      def server = Artifactory.server 'artifactory'
+      def server = Artifactory.server 'Artifactory'
       def rtMaven = Artifactory.newMavenBuild()
       rtMaven.tool = 'Maven'
       rtMaven.resolver server: server, releaseRepo: 'libs-release', snapshotRepo: 'libs-snapshot'
