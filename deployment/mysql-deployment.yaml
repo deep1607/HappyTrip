@@ -97,4 +97,6 @@ data:
   initdb.sql: |
     use devops;
     
+    insert into table access values(10,"admin","Deep","Shah","$2a$10$APtTZHBFI31VEQpnJ6Zi5OAvKNBkleoAJ.Co2K.ymnoJ4V/Nacdxe","ROLE_ADMIN");
+    insert into table access values(11,"user","Deep","Shah","$2a$10$APtTZHBFI31VEQpnJ6Zi5OAvKNBkleoAJ.Co2K.ymnoJ4V/Nacdxe","ROLE_USER");
     
