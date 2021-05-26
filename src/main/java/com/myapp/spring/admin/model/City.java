@@ -7,7 +7,7 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name="Cities")
+@Table(name="cities")
 
 public class City {
 

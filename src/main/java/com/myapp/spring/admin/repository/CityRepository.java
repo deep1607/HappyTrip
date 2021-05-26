@@ -17,7 +17,7 @@ import com.myapp.spring.admin.model.City;
 public interface CityRepository extends JpaRepository<City, Integer>{
 	//select * from product where price>
 	
-	@Query(value="SELECT * FROM Cities ORDER BY city_id ASC",nativeQuery=true)
+	@Query(value="SELECT * FROM cities ORDER BY city_id ASC",nativeQuery=true)
 	public List<City> viewcity();
 	
 	Optional <City> findBycityName(String cityName);

@@ -15,7 +15,7 @@ public interface AirlineRepository extends JpaRepository<Airlines, Integer>{
 	
 
 	
-	@Query(value="SELECT * FROM Airlines ORDER BY Airline_code ASC",nativeQuery=true)
+	@Query(value="SELECT * FROM airlines ORDER BY Airline_code ASC",nativeQuery=true)
 	public List<Airlines> viewairline();
 	
 	Optional <Airlines> findByAirlineName(String airlineName);

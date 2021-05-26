@@ -7,7 +7,7 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name="Airlines")
+@Table(name="airlines")
 
 public class Airlines {
 	

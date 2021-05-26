@@ -17,7 +17,7 @@ import com.myapp.spring.admin.model.RouteModel;
 public interface RouteRepository extends JpaRepository<RouteModel, Integer>{
 	//select * from product where price>
 	
-	@Query(value="SELECT * FROM Route ORDER BY Route_id ASC",nativeQuery=true)
+	@Query(value="SELECT * FROM route ORDER BY Route_id ASC",nativeQuery=true)
 	public List<RouteModel> viewAllRoute();
 	
 	Optional <RouteModel> findByFromCityAndToCity(String fromCity,String toCity);

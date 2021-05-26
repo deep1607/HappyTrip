@@ -7,7 +7,7 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name="Route")
+@Table(name="route")
 
 public class RouteModel {
 
